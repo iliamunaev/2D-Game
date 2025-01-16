@@ -1,55 +1,44 @@
 # --------------------------- Executable and Library ------------------------- #
-NAME    = so_long
-LIBFT   = $(LIBDIR)/libft.a
+NAME    := so_long
 
-# ----------------------------- Compiler Settings ---------------------------- #
-CC      = cc
-CFLAGS  = -lm -Wall -Wextra -Werror
+CC      := cc
+CFLAGS  := -Wextra -Wall -Werror
+LIBMLX  := ./libs/MLX42
 
-# --------------------------------- Folders ---------------------------------- #
-SRCDIR  = src
-OBJDIR  = obj
-LIBDIR  = libft
-INCDIR  = include
+HEADERS := -Iinclude -Ilibs/MLX42/include
+LIBS    := libs/MLX42/build/libmlx42.a -ldl -lglfw
 
-# ------------------------------ Source Files -------------------------------- #
-SRCS = \
-	$(SRCDIR)/main.c
+SRCS    := $(shell find ./src -name "*.c")
+OBJS    := $(SRCS:.c=.o)
 
-OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
+# ------------------------------ Colors -------------------------------------- #
+RESET   := \033[0m
+GREEN   := \033[32m
+BLUE    := \033[34m
 
-# ------------------------------- Main Targets ------------------------------- #
-all: $(LIBFT) $(NAME)
+# ------------------------------- Targets ------------------------------------ #
+all: libmlx $(NAME)
+	@echo "$(GREEN)[SUCCESS] Program $(NAME) compiled successfully!$(RESET)"
+
+libmlx:
+	cmake $(LIBMLX) -B $(LIBMLX)/build
+	make -C $(LIBMLX)/build -j4
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBDIR) -lft
-	@echo -e "\033[32m\"$(NAME)\": successfully created!\033[0m"
+	$(CC) $(OBJS) $(LIBS) -o $(NAME)
 
-$(LIBFT):
-	@$(MAKE) -C $(LIBDIR)
+%.o: %.c
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-# ------------------------------ Object Files -------------------------------- #
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBDIR) -c $< -o $@
-
-# ------------------------------- Clean Targets ------------------------------ #
 clean:
-	rm -rf $(OBJDIR)
-	@$(MAKE) clean -C $(LIBDIR)
-	@echo -e "\033[32m\"$(NAME)\": temporary files successfully removed!\033[0m"
-	@echo ""
-
+	rm -rf $(OBJS)
+	rm -rf $(LIBMLX)/build
+	@echo "$(BLUE)Cleaned object files and MLX42 build directory.$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIBDIR)
-	@echo -e "\033[32m\"$(NAME)\": executable successfully removed!\033[0m"
-	@echo ""
-
-
+	rm -rf $(NAME)
+	@echo "$(BLUE)Cleaned executable $(NAME).$(RESET)"
 
 re: fclean all
 
-# ---------------------------- Phony Declarations ---------------------------- #
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libmlx
