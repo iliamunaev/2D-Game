@@ -1,4 +1,4 @@
-#include "../include/so_long.h"
+#include "so_long.h"
 
 static mlx_image_t* image;
 
@@ -17,7 +17,7 @@ void ft_randomize(void* param)
 		for (uint32_t y = 0; y < image->height; ++y)
 		{
 			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
+				rand() % 0xFA, // R
 				rand() % 0xFF, // G
 				rand() % 0xFF, // B
 				rand() % 0xFF  // A
@@ -54,19 +54,19 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
+	if (!(image = mlx_new_image(mlx, 50, 128)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	if (mlx_image_to_window(mlx, image, 50, 120) == -1)
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-
+	
 	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
