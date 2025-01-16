@@ -1,0 +1,14 @@
+temp/
+*.o
+*.a
+.vscode/
+obj/
+a.out
+libft-unit-tests/
+*.so
+imtest42/
+*.sh
+*.so
+utest/
+warmachuintester/
+
