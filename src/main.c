@@ -1,5 +1,5 @@
 #include "so_long.h"
-
+/*
 static mlx_image_t* image;
 
 // -----------------------------------------------------------------------------
@@ -44,16 +44,42 @@ void ft_hook(void* param)
 }
 
 // -----------------------------------------------------------------------------
-
-int32_t main(void)
+*/
+void init_game(t_map *map)
 {
 	mlx_t* mlx;
+	t_map *map;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	map = malloc(sizeof(t_map));
+	if(!map)
+		return 0;	
+	map->width = 1000;
+	map->height = 1000;
+
+
+	if (!(mlx = mlx_init(map->width, map->height, "so_long", true)))
 	{
-		puts(mlx_strerror(mlx_errno));
+		ft_printf("Error: mlx_init\n");
 		return(EXIT_FAILURE);
 	}
+	else 
+	ft_printf("Success: mlx_init\n");
+
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
+
+}
+int32_t main(void)
+{
+
+
+
+	init_game(map);
+
+
+
+	/*
 	if (!(image = mlx_new_image(mlx, 50, 128)))
 	{
 		mlx_close_window(mlx);
@@ -69,9 +95,7 @@ int32_t main(void)
 	
 	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
+*/
 
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
 }
 
