@@ -2,14 +2,18 @@
 #define SO_LONG_H
 
 
-#include <stdbool.h>    // For boolean type
-#include <stdio.h>      // For printf, fprintf
-#include <stdlib.h>     // For malloc, free, exit
-#include <string.h>     // For string functions
+#include <stdbool.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
 #include <MLX42/MLX42.h>
 #include "../libs/libft/libft.h"
 
-#define TILE_SIZE 64
+#define TILE_SIZE 32
+#define MAX_COLUMNS 24
+#define MAX_ROWS 32
+#define INIT_ERROR 2
+
 
 // Structs
 typedef struct	s_map
@@ -17,7 +21,10 @@ typedef struct	s_map
 	char	**layout;       // 2D array representing the map
 	int		columns;           // Map width
 	int		rows;          // Map height
-	int		collectible_count; // Number of collectibles
+	int		collectibles; // Number of collectibles
+	int		walls;
+	int		player;
+	int		exit;
 }	t_map;
 
 typedef struct s_sprites

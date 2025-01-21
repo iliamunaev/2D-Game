@@ -27,6 +27,7 @@ LIBFT_SRC = ft_atoi.c \
             ft_strchr.c \
             ft_striteri.c \
             ft_strjoin.c \
+            ft_strcmp.c \
             ft_strdup.c \
             ft_strlcat.c \
             ft_strlcpy.c \
