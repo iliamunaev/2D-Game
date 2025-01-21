@@ -6,30 +6,33 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:39:25 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/07 08:39:27 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:26:11 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** ft_strdup() returns a pointer to a new string,
-** which is a duplicate of the string pointed to by s.
-** The returned pointer can be passed to free().
-** Return: a pointer to the duplicated string;
-** NULL if insufficient memory was available, with errno set to indicate
-** the cause of the error.
-*/
-
 #include "libft.h"
 
+/**
+ * @brief Creates a duplicate of a string.
+ *
+ * This function allocates memory and returns a pointer to a new string
+ * that is a duplicate of the string `s`. The memory for the new string
+ * is obtained with `malloc` and can be freed with `free`.
+ *
+ * @param s The string to duplicate.
+ * @return char* A pointer to the duplicated string, or NULL if insufficient
+ *         memory was available. If NULL is returned, `errno` is set to indicate
+ *         the error.
+ */
 char	*ft_strdup(const char *s)
 {
-	size_t	slen;
-	char	*dupptr;
+	size_t	len;
+	char	*s_dup;
 
-	slen = ft_strlen(s);
-	dupptr = malloc(slen + 1);
-	if (!dupptr)
+	len = ft_strlen(s);
+	s_dup = malloc(len + 1);
+	if (!s_dup)
 		return (NULL);
-	ft_strlcpy(dupptr, s, slen + 1);
-	return (dupptr);
+	ft_strlcpy(s_dup, s, len + 1);
+	return (s_dup);
 }

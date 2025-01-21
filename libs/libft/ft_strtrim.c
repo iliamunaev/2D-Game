@@ -6,19 +6,25 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:30:55 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/07 15:30:58 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:47:16 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * The function allocates (with malloc(3)) and returns a copy of ’s1’
- * with the characters specified in ’set’ removed from the beginning
- * and the end of the string.
- * Return: the trimmed string, NULL if the allocation fails
- */
-
 #include "libft.h"
 
+/**
+ * @brief Trims specified characters from the beginning and end of a string.
+ *
+ * This function allocates memory and returns a copy of the string `s1` with
+ * all characters specified in `set` removed from both the beginning and the
+ * end. The function does not modify the original string.
+ *
+ * @param s1 The input string to be trimmed. If NULL, the function returns NULL.
+ * @param set The set of characters to remove. If NULL, the function returns
+ *            a copy of `s1`.
+ * @return char* A newly allocated string with the specified characters removed,
+ *         or NULL if memory allocation fails.
+ */
 static int	is_inset(char const *set, char c)
 {
 	while (*set)

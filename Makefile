@@ -23,7 +23,11 @@ all: libmlx libft $(NAME)
 	@echo "$(GREEN)Program $(NAME) compiled successfully!$(RESET)"
 
 libmlx:
-	@echo "$(BLUE)[LIBMLX] Building MLX42 library...$(RESET)"
+	@echo "$(BLUE)[LIBMLX] Checking and building MLX42 library...$(RESET)"
+	@if [ ! -d "$(LIBMLX)" ]; then \
+		echo "$(RED)MLX42 not found! Downloading...$(RESET)"; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+	fi
 	cmake $(LIBMLX) -B $(LIBMLX)/build
 	make -C $(LIBMLX)/build -j4
 

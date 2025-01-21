@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 23:12:34 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/10 14:56:44 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:50:00 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line.h"
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -25,6 +26,7 @@ int		ft_isalpha(int ch);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_isspace(char c);
 char	*ft_itoa(int n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -52,5 +54,6 @@ char	*ft_strdup(const char *s);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 ssize_t	ft_printf(const char *format, ...);
+char	*get_next_line(int fd);
 
 #endif //LIBFT_H

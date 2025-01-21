@@ -6,19 +6,24 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 09:22:42 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/07 09:25:23 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:21:51 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * Outputs the integer ’n’ to the given file descriptor.
- * n: The integer to output.
- * fd: The file descriptor on which to write.
- * Return: None
- */
-
 #include "libft.h"
 
+/**
+ * @brief Outputs an integer to a specified file descriptor.
+ *
+ * This function writes the integer `n` to the file descriptor `fd`.
+ * If the integer is negative, a '-' sign is output first, followed
+ * by the absolute value of the number. The function handles the special
+ * case of the smallest possible integer (-2147483648) to ensure correct output.
+ *
+ * @param n The integer to output.
+ * @param fd The file descriptor on which to write.
+ * @return void This function does not return a value.
+ */
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

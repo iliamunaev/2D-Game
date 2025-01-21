@@ -6,16 +6,23 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 23:36:33 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/17 21:52:29 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:11:17 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** The function converts the initial portion of the string
-** pointed to by 'str' to 'int'.
-** Return: the converted value or '0' on error.
-*/
+#include "libft.h"
 
+/**
+ * @brief Converts the initial portion of a string to an integer.
+ *
+ * This function skips leading whitespace, handles an optional '+' or '-' sign,
+ * and accumulates numeric characters until encountering a non-digit or the end
+ * of the string. The result is returned as an integer value.
+ *
+ * @param str The string to be converted.
+ * @return int The converted integer, or 0 if no valid conversion could be
+ * performed.
+ */
 int	ft_atoi(const char *str)
 {
 	int			sign;
@@ -23,11 +30,8 @@ int	ft_atoi(const char *str)
 
 	num = 0;
 	sign = 1;
-	while (*str == ' ' || *str == '\n' || *str == '\f' || *str == '\r'
-		|| *str == '\t' || *str == '\v')
-	{
+	while (ft_isspace(*str))
 		str++;
-	}
 	if (*str == '-')
 	{
 		sign = -1;
@@ -35,7 +39,7 @@ int	ft_atoi(const char *str)
 	}
 	else if (*str == '+')
 		str++;
-	while (*str >= '0' && *str <= '9')
+	while (ft_isdigit(*str))
 	{
 		num = num * 10 + (*str - '0');
 		str++;

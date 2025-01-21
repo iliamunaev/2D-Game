@@ -6,18 +6,25 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:57:30 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/17 22:07:40 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:39:32 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-* The function allocates (with malloc(3)) and returns a new
-* string, which is the result of the concatenation of ’s1’ and ’s2’.
-* Return: the new string, NULL if the allocation fails.
-*/
-
 #include "libft.h"
 
+/**
+ * @brief Concatenates two strings into a newly allocated string.
+ *
+ * This function allocates memory and returns a new string that is the result
+ * of concatenating the strings `s1` and `s2`. The memory for the new string
+ * is obtained using `malloc` and must be freed by the caller.
+ *
+ * @param s1 The first string to concatenate.
+ * @param s2 The second string to concatenate.
+ * @return char* A pointer to the newly allocated string containing
+ *         the concatenated result of `s1` and `s2`, or NULL if memory
+ *         allocation fails.
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;

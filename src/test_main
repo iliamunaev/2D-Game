@@ -1,0 +1,142 @@
+#include "so_long.h"
+/*
+static mlx_image_t* image;
+
+// -----------------------------------------------------------------------------
+
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void ft_randomize(void* param)
+{
+	(void)param;
+	for (uint32_t i = 0; i < image->width; ++i)
+	{
+		for (uint32_t y = 0; y < image->height; ++y)
+		{
+			uint32_t color = ft_pixel(
+				rand() % 0xFA, // R
+				rand() % 0xFF, // G
+				rand() % 0xFF, // B
+				rand() % 0xFF  // A
+			);
+			mlx_put_pixel(image, i, y, color);
+		}
+	}
+}
+
+void ft_hook(void* param)
+{
+	mlx_t* mlx = param;
+
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		image->instances[0].y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		image->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		image->instances[0].x -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		image->instances[0].x += 5;
+}
+
+// -----------------------------------------------------------------------------
+*/
+int init_game(t_map *map)
+{
+	mlx_t *mlx;
+
+	mlx = mlx_init(map->colums, map->rows, "so_long", true);
+	if (!mlx)
+	{
+		ft_printf("Error: mlx_init\n");
+		return(INIT_ERROR);
+	}
+	else
+	ft_printf("Success: mlx_init\n");
+
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
+}
+
+t_map_layout	*validate_input (char *av)
+{
+	(void)av;
+
+	t_map_layout	*map_layout;
+
+	map_layout = malloc(sizeof(t_map_layout));
+	if(!map_layout)
+		return (NULL);
+	ft_bzero(map_layout, sizeof(t_map_layout));
+
+	map_layout->colums = 500;
+	map_layout->rows = 500;
+
+	return (map_layout);
+}
+
+t_map	*init_map (char *av)
+{
+	t_map *map;
+	t_map_layout *map_layout;
+
+	map_layout = validate_input(av);
+	if(!map_layout)
+		return(NULL);
+
+	map = malloc(sizeof(t_map));
+	if(!map)
+		return(NULL);
+
+	map->colums = map_layout->colums;
+	map->rows = map_layout->rows;
+
+	return(map);
+}
+
+
+int	main(int ac, char **av)
+{
+	(void)ac;
+	t_map *map;
+	int game;
+
+	map = init_map(av[1]);
+	if(!map)
+		return(EXIT_FAILURE); // clean mem
+
+	game = init_game(map);
+	if(game == INIT_ERROR)
+		return(EXIT_FAILURE); // clean mem
+
+	return (EXIT_SUCCESS);
+}
+
+
+
+
+	/*
+	if (!(image = mlx_new_image(mlx, 50, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 50, 120) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+
+	mlx_loop_hook(mlx, ft_randomize, mlx);
+	mlx_loop_hook(mlx, ft_hook, mlx);
+*/
+
+
+

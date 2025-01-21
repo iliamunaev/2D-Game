@@ -6,21 +6,25 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:00:26 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/07 12:03:45 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:55:53 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * Allocates (with malloc(3)) and returns a string
- * representing the integer received as an argument.
- * n: the integer to convert.
- * Return: The string representing the integer;
- * NULL if the allocation fails.
- */
-
 #include "libft.h"
 
-static int	get_digit_count(int n)
+/**
+ * @brief Converts an integer to a null-terminated string.
+ *
+ * This function allocates memory and returns a string representation of
+ * the integer `n`. If the integer is negative, the resulting string includes
+ * a leading '-' sign. Memory for the string is obtained using `malloc`
+ * and must be freed by the caller.
+ *
+ * @param n The integer to convert to a string.
+ * @return char* A pointer to the string representation of the integer, or
+ *         NULL if memory allocation fails.
+ */
+static int	get_len(int n)
 {
 	int	count;
 
@@ -37,35 +41,35 @@ static int	get_digit_count(int n)
 	return (count);
 }
 
-static char	*fill_str(char *str, unsigned int digit_count, int n)
+static char	*fill_str(char *str, unsigned int len, int n)
 {
-	char	*strp;
+	char	*s;
 
-	strp = str;
-	while (digit_count > 0)
+	s = str;
+	while (len > 0)
 	{
-		digit_count--;
-		strp[digit_count] = (n % 10) + '0';
+		len--;
+		s[len] = (n % 10) + '0';
 		n /= 10;
 	}
-	return (strp);
+	return (s);
 }
 
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		digit_count;
+	int		len;
 	int		sign;
 
 	sign = 1;
-	digit_count = get_digit_count(n);
-	str = (char *)malloc(digit_count + 1);
+	len = get_len(n);
+	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	str[digit_count] = '\0';
+	str[len] = '\0';
 	if (n == -2147483648)
 	{
-		str[--digit_count] = '8';
+		str[--len] = '8';
 		n /= 10;
 	}
 	if (n < 0)
@@ -73,7 +77,7 @@ char	*ft_itoa(int n)
 		sign = -1;
 		n = -n;
 	}
-	fill_str(str, digit_count, n);
+	fill_str(str, len, n);
 	if (sign == -1)
 		str[0] = '-';
 	return (str);

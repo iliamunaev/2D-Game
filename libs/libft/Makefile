@@ -37,14 +37,19 @@ LIBFT_SRC = ft_atoi.c \
             ft_strrchr.c \
             ft_strtrim.c \
             ft_tolower.c \
-            ft_toupper.c
+            ft_toupper.c \
+            ft_isspace.c
 
 # ft_printf source files
 PRINTF_SRC = ft_printf/ft_printf.c \
              ft_printf/ft_printf_utils.c
 
+# ft_printf source files
+GET_N_LINE_SRC = get_next_line/get_next_line.c \
+                get_next_line/get_next_line_utils.c
+
 # Combine all source files
-SRC = $(LIBFT_SRC) $(PRINTF_SRC)
+SRC = $(LIBFT_SRC) $(PRINTF_SRC) $(GET_N_LINE_SRC)
 
 # Object files directory
 OBJ_DIR = obj
@@ -61,8 +66,7 @@ all: $(NAME)
 # Create the library
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
-	@echo -e "\033[32m\"$(NAME)\": successfully created!\033[0m"
-	@echo ""
+	@echo "\033[32m\"$(NAME)\": successfully created!\033[0m"
 
 # Rule to compile source files into object files in the obj directory
 $(OBJ_DIR)/%.o: %.c $(HEADER)

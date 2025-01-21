@@ -6,23 +6,25 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:01:47 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/07 17:08:09 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:58:46 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** Allocates (with malloc(3)) and returns an array
-** of strings obtained by splitting ’s’ using the
-** character ’c’ as a delimiter. The array must end
-** with a NULL pointer.
-** s: The string to be split.
-** c: The delimiter character.
-** Return: The array of new strings resulting from the split.
-** NULL if the allocation fails.
-*/
-
 #include "libft.h"
 
+/**
+ * @brief Splits a string into an array of substrings using a delimiter.
+ *
+ * This function allocates memory to create an array of substrings, splitting
+ * the string `s` at every occurrence of the delimiter character `c`. The
+ * resulting array is null-terminated. If memory allocation fails at any point,
+ * previously allocated memory is freed.
+ *
+ * @param s The input string to be split. If NULL, the function returns NULL.
+ * @param c The delimiter character used to split the string.
+ * @return char** A pointer to the array of substrings resulting from the split.
+ *         If memory allocation fails, the function returns NULL.
+ */
 static int	count_substr(char const *s, char delim)
 {
 	int	count;
@@ -62,19 +64,19 @@ static char	*create_substr(char const *start, int len)
 	return (substr);
 }
 
-static void	free_all_mem(char **arr, int index)
+static void	free_all_mem(char **arr, int i)
 {
-	while (index >= 0)
-		free(arr[index--]);
+	while (i >= 0)
+		free(arr[i--]);
 	free(arr);
 }
 
 static int	fill_substrings(char **arr, char const *s, char c)
 {
-	int	index;
+	int	i;
 	int	len;
 
-	index = 0;
+	i = 0;
 	while (*s)
 	{
 		while (*s == c)
@@ -84,17 +86,17 @@ static int	fill_substrings(char **arr, char const *s, char c)
 			len++;
 		if (len > 0)
 		{
-			arr[index] = create_substr(s, len);
-			if (!arr[index])
+			arr[i] = create_substr(s, len);
+			if (!arr[i])
 			{
-				free_all_mem(arr, index - 1);
+				free_all_mem(arr, i - 1);
 				return (0);
 			}
-			index++;
+			i++;
 			s += len;
 		}
 	}
-	arr[index] = NULL;
+	arr[i] = NULL;
 	return (1);
 }
 
