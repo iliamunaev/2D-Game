@@ -1,14 +1,23 @@
 #include "so_long.h"
 
 
-void	init_game(t_game *game, t_map *map)
+t_game	*init_game(t_map *map)
 {
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if(!game)
+	{
+		// err msg
+		return -1;
+	}
+
 	// init map
 	game->map = map;
 	if (!game->map)
 	{
 		// error msg
-
+		return -1;
 	}
 
 	// init game
@@ -16,7 +25,7 @@ void	init_game(t_game *game, t_map *map)
 	if (!game->mlx)
 	{
 		// error msg
-
+		return -1;
 	}
 
 	// init sprites
@@ -24,8 +33,9 @@ void	init_game(t_game *game, t_map *map)
 	if (!game->sprites)
 	{
 		// err msg
+		return -1;
 	}
-	load_sprites(game, ); 
+	load_sprites(game, );
 
 
 	// init player
@@ -42,6 +52,8 @@ void	init_game(t_game *game, t_map *map)
 	// load textures
 
 	// init player's position
-	init_player(game->player, game->map);   
+	init_player(game->player, game->map);
+
+	return(game);
 }
 

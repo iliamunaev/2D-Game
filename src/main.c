@@ -1,39 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
+/*   Updated: 2025/01/26 14:28:13 by imunaev-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-
-void cleanup_game(t_game *game)
-{
-	for (int y = 0; y < game->map->height; y++) {
-		free(game->map->layout[y]);
-	}
-	free(game->map->layout);
-	free(game->map);
-
-	free(game->sprites->wall);
-	free(game->sprites->floor);
-	free(game->sprites->player);
-	free(game->sprites->collectible);
-	free(game->sprites->exit);
-	free(game->sprites);
-
-	free(game->player);
-	mlx_terminate(game->mlx);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 int	main(int ac, char **av)
 {
+
 	t_game	*game;
 	t_map	*map;
 
@@ -43,17 +24,24 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
-	// Step 1: Validate map and load layout
+
+	// Step 2: Validate map and load layout
 	map = load_map(av[1]);
 
 	if(!map)
 	{
+		clean_up_game(NULL, map);
 		ft_putstr_fd("Error: map is not valid\n",2);
 		return (EXIT_FAILURE);
 	}
 
-	// Step 2: 
-	init_game(game, map);
+	// Step 2:
+	game = init_game(map);
+	if(game == -1)
+	{
+		clean_up_game(game, map);
+		return (EXIT_FAILURE);
+	}
 
 	// Step 3:
 
@@ -63,7 +51,7 @@ int	main(int ac, char **av)
 		render_game(game);
 	}
 
-	cleanup_game(game);
+	clean_up_game(game, NULL);
 
 	return (EXIT_SUCCESS);
 }

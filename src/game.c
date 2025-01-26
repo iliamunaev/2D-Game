@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 13:36:20 by imunaev-          #+#    #+#             */
+/*   Updated: 2025/01/26 13:36:21 by imunaev-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 
@@ -12,11 +24,11 @@ void	move_player(t_game *game, int dx, int dy)
 
 	// prevent movemant out of map
 	if (new_x < 0 || new_x >= game->map->columns || new_y < 0 || new_y >= game->map->rows)
-		return ; 
+		return ;
 
 	// preventr movement into walls
 	next_tile = game->map->layout[new_y][new_x];
-	if (next_tile == '1') 
+	if (next_tile == '1')
 		return ;
 
 	if (next_tile == 'C')
