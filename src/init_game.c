@@ -17,7 +17,7 @@ t_game	*init_game(t_map *map)
 	if (!game->map)
 	{
 		// error msg
-		return -1;
+		return EXIT_FAILURE;
 	}
 
 	// init game
@@ -25,7 +25,7 @@ t_game	*init_game(t_map *map)
 	if (!game->mlx)
 	{
 		// error msg
-		return -1;
+		return EXIT_FAILURE;
 	}
 
 	// init sprites
@@ -33,26 +33,21 @@ t_game	*init_game(t_map *map)
 	if (!game->sprites)
 	{
 		// err msg
-		return -1;
+		return EXIT_FAILURE;
 	}
-	load_sprites(game, );
-
+	load_textures(game);
 
 	// init player
 	game->player = malloc(sizeof(t_player));
 	if (!game->player)
 	{
 		// err msg
+		return EXIT_FAILURE;
 	}
+	init_player(game->player, game->map);
 
 	game->move_count = 0;
-
 	game->running = true;
-
-	// load textures
-
-	// init player's position
-	init_player(game->player, game->map);
 
 	return(game);
 }

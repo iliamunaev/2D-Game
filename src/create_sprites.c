@@ -6,34 +6,43 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:35:24 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 13:43:03 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:15:39 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void create_sprites(t_game *game)
+mlx_image_t	*get_img(t_game *game, const char *path)
 {
+	mlx_texture_t	*texture;
+	mlx_image_t		*img;
 
-	game->sprites->collectible =  mlx_load_png("../sprites/collectible.png");
-	if (!game->sprites->collectible)
-		error();
+	img = NULL;
 
-	game->sprites->wall =  mlx_load_png("../sprites/wall.png");
-	if (!game->sprites->wall)
-		error();
+	texture = mlx_load_png(path);
+	if(!texture)
+	{
+		// error
+	}
 
-	game->sprites->exit =  mlx_load_png("../sprites/exit.png");
-	if (!game->sprites->exit)
-		error();
+	img = mlx_texture_to_image(game->mlx, texture);
+	if(!img)
+	{
+		mlx_delete_texture(img);
+		// error
+	}
 
-	game->sprites->floor =  mlx_load_png("../sprites/floor.png");
-	if (!game->sprites->floor)
-		error();
+	mlx_delete_texture(texture);
 
-	game->sprites->player =  mlx_load_png("../sprites/player.png");
-	if (!game->sprites->player)
-		error();
-
+	return (img);
 }
 
+void	load_textures(t_game *game)
+{
+	game->sprites->collectible = get_img(game, PATH_TO_COLLECTIBLE);
+	game->sprites->wall = get_img(game, PATH_TO_WALL);
+	game->sprites->exit = get_img(game, PATH_TO_EXIT);
+	game->sprites->floor = get_img(game, PATH_TO_FLOOR);
+	game->sprites->player = get_img(game, PATH_TO_PLAYER);
+
+}

@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:45:54 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 14:20:22 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:39:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	clean_up_sprites(t_sprites *sprites)
 	free(sprites);
 }
 
-void clean_up_game(t_game *game, t_map *map)
+void clean_up_game(t_game *game, t_map *map, char *msg, int	exit_mark)
 {
 
 	if(game)
@@ -57,4 +57,8 @@ void clean_up_game(t_game *game, t_map *map)
 	}
 	if(map)
 		clean_up_map(map);
+	if(msg)
+		ft_putstr_fd(msg,2);
+	if(exit_mark)
+		return(exit_mark);
 }

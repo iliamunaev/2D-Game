@@ -6,59 +6,79 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:25 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 13:36:26 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:33:36 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void render_tile(t_game *game, int x, int y)
+static void	render_tile(t_game *game, int y, int x)
 {
 	char			tile;
-	mlx_texture_t	*texture;
 	mlx_image_t		*img;
 
 	tile = game->map->layout[y][x];
-	texture = NULL;
+	img = NULL;
 
 	if (tile == '1')
-		texture = game->sprites->wall;
+		img = game->sprites->wall;
 	else if (tile == '0')
-		texture = game->sprites->floor;
+		img = game->sprites->floor;
 	else if (tile == 'C')
-		texture = game->sprites->collectible;
+		img = game->sprites->collectible;
 	else if (tile == 'E')
-		texture = game->sprites->exit;
+		img = game->sprites->exit;
 	else if (tile == 'P')
-		texture = game->sprites->player;
-
-	if (texture)
+		img = game->sprites->player;
+	if (!img)
 	{
-		img = mlx_texture_to_image(game->mlx, texture);
-		mlx_image_to_window(game->mlx, img, x * TILE_SIZE, y * TILE_SIZE);
-
-		// Free the temporary image
-		mlx_delete_image(game->mlx, img);
+		// err
 	}
+	mlx_image_to_window(game->mlx, img, x * TILE_SIZE, y * TILE_SIZE);
+	// Free the temporary image
+	mlx_delete_image(game->mlx, img);
+}
+
+void	flood_fill(t_game *game, char target, int row, int col)
+{
+	if(col < 0 || row < 0 || col >= MAX_COLUMNS || row >= MAX_ROWS)
+		return ;
+	render_tile(game, row, col);
+	flood_fill(game, target, row + 1, col);
+	flood_fill(game, target, row, col + 1);
+	flood_fill(game, target, row - 1, col);
+	flood_fill(game, target, row, col - 1);
+}
+
+static void	render_dynamic(t_game *game)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	col = 0;
+	flood_fill(game, 'C', row, col);
+	flood_fill(game, 'P', row, col);
+	flood_fill(game, 'E', row, col);
+}
+
+static void	render_static(t_game *game)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	col = 0;
+	flood_fill(game, '0', row, col);
+	flood_fill(game, '1', row, col);
 }
 
 void	render_game(t_game *game)
 {
-	int	x;
-	int	y;
-	// Clear the previous frame
-	mlx_clear_window(game->mlx);
-
-	// Render the map
-	y = 0;
-	while (y < game->map->rows)
+	render_static(game);
+	while (game->running)
 	{
-		x = 0;
-		while(x < game->map->columns)
-		{
-			render_tile(game, x, y);
-			x++;
-		}
-		y++;
+		handle_input_loop(game);
+		render_dynamic(game);
 	}
 }
