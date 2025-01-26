@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:45:54 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 17:39:37 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/26 19:59:09 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	clean_up_map(t_map *map)
 	free(map);
 }
 
-void	clean_up_sprites(t_sprites *sprites)
+static void	clean_up_sprites(t_sprites *sprites)
 {
 	if(sprites->wall)
 		free(sprites->wall);
@@ -40,9 +40,8 @@ void	clean_up_sprites(t_sprites *sprites)
 	free(sprites);
 }
 
-void clean_up_game(t_game *game, t_map *map, char *msg, int	exit_mark)
+void	clean_up_game(t_game *game, t_map *map, char *msg, int exit_mark)
 {
-
 	if(game)
 	{
 		if(game->map)

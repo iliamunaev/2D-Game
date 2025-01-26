@@ -1,6 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 19:59:26 by imunaev-          #+#    #+#             */
+/*   Updated: 2025/01/26 20:48:25 by imunaev-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
+static int	init_player(t_game *game)
+{
+	t_player	*player;
 
+	player = malloc(sizeof(t_player));
+	if(!player)
+	{
+		return (INIT_ERROR);
+
+	}
+	player->y = 0;
+	player->x = 0;
+	player->collected = 0;
+	game->player = player;
+
+	return(INIT_SUCCESS);
+}
 t_game	*init_game(t_map *map)
 {
 	t_game	*game;
@@ -9,43 +37,42 @@ t_game	*init_game(t_map *map)
 	if(!game)
 	{
 		// err msg
-		return -1;
+		return (NULL);
 	}
 
-	// init map
 	game->map = map;
 	if (!game->map)
 	{
 		// error msg
-		return EXIT_FAILURE;
+		return (NULL);
 	}
 
-	// init game
 	game->mlx = mlx_init(game->map->columns * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true);
 	if (!game->mlx)
 	{
 		// error msg
-		return EXIT_FAILURE;
+		return (NULL);
 	}
 
-	// init sprites
 	game->sprites = malloc(sizeof(t_sprites));
 	if (!game->sprites)
 	{
-		// err msg
-		return EXIT_FAILURE;
+		// error msg
+		return (NULL);
 	}
 	load_textures(game);
 
-	// init player
 	game->player = malloc(sizeof(t_player));
 	if (!game->player)
 	{
 		// err msg
-		return EXIT_FAILURE;
+		return (NULL);
 	}
-	init_player(game->player, game->map);
-
+	if(init_player(game) == INIT_ERROR)
+	{
+		// err msg
+		return (NULL);
+	}
 	game->move_count = 0;
 	game->running = true;
 
