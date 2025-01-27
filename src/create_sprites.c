@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:35:24 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 12:29:53 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:54:26 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ mlx_image_t	*get_img(t_game *game, const char *path)
 	texture = mlx_load_png(path);
 	if(!texture)
 	{
-		// error
+		ft_putstr_fd("get_img(): ERROR mlx_load_png\n", 2);
+		// exit
 	}
 
 	img = mlx_texture_to_image(game->mlx, texture);
 	if(!img)
 	{
+		ft_putstr_fd("get_img(): ERROR mlx_texture_to_image\n", 2);
 		mlx_delete_texture(texture);
-		// error
+		// exit
 	}
 
 	mlx_delete_texture(texture);
-
 	return (img);
 }
 

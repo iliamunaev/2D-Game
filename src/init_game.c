@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:59:26 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 20:48:25 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:11:04 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ t_game	*init_game(t_map *map)
 		return (NULL);
 	}
 
-	game->mlx = mlx_init(game->map->columns * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true);
+	game->mlx = mlx_init(game->map->columns * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true); // tested
 	if (!game->mlx)
 	{
-		// error msg
+		ft_putstr_fd("main(): Error mlx_init\n", 2);
 		return (NULL);
 	}
 
