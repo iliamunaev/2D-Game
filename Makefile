@@ -2,7 +2,7 @@
 NAME    := so_long
 
 CC      := cc
-CFLAGS  := -Wextra -Wall -Werror
+CFLAGS  := -Wextra -Wall -Werror -g
 
 LIBMLX  := ./libs/MLX42
 LIBFT   := ./libs/libft

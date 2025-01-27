@@ -6,13 +6,14 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:35:24 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 14:54:26 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:59:34 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-mlx_image_t	*get_img(t_game *game, const char *path)
+// in case of faier all must be free here
+mlx_image_t	*get_img(t_game *game, const char *path) // tested
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
@@ -38,6 +39,7 @@ mlx_image_t	*get_img(t_game *game, const char *path)
 	return (img);
 }
 
+// in case of failer clean up and exit from get_img()
 void	load_textures(t_game *game)
 {
 	game->sprites->collectible = get_img(game, PATH_TO_COLLECTIBLE);

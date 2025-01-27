@@ -3,49 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 09:52:22 by imunaev-          #+#    #+#             */
-/*   Updated: 2024/11/14 13:16:20 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:59:24 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-** Returns the length of the string 's'.
-*/
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s && s[len])
-		len++;
-	return (len);
-}
-
-/*
-** Searches for the character 'c' in the string 's'.
-** Returns a pointer to the first occurrence of 'c', or NULL if not found.
-*/
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *)(s + i));
-	return (NULL);
-}
 
 /*
 ** Joins two strings 's1' and 's2' into a new string.
@@ -72,36 +38,5 @@ char	*ft_strjoin_and_free(char *s1, char *s2)
 	return (new_str);
 }
 
-/*
-** Copies 'n' characters from 'src' to 'dest'.
-** 'dest' must be large enough to hold the copied characters.
-*/
-void	ft_strncpy(char *dest, const char *src, size_t n)
-{
-	size_t	i;
 
-	i = 0;
-	while (src && src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-}
 
-/*
-** Copies the string 'src' to 'dest'.
-** Assumes 'dest' is large enough to hold 'src'.
-*/
-void	ft_strcpy(char *dest, const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (src && src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-}

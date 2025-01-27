@@ -6,12 +6,12 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:20 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 12:30:19 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:40:30 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/*
 
 void	move_player(t_game *game, int dx, int dy)
 {
@@ -74,3 +74,4 @@ void	handle_input_loop(t_game *game)
 	}
 }
 
+*/

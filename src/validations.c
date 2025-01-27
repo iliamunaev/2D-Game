@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validations.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:32 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 20:51:34 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:51:35 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/*
 bool	is_valid_file(const char *map_file)
 {
 	const char	*extension;
@@ -143,3 +143,4 @@ bool	is_validate_layout(t_map *map, t_monitor *monitor)
 		return (false);
 	return(true);
 }
+*/

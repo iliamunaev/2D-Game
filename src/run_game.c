@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rander_game.c                                      :+:      :+:    :+:   */
+/*   start_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:25 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 17:33:36 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:16:18 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	render_tile(t_game *game, int y, int x)
+void	render_tile(t_game *game, int y, int x)
 {
 	char			tile;
 	mlx_image_t		*img;
@@ -50,7 +50,7 @@ void	flood_fill(t_game *game, char target, int row, int col)
 	flood_fill(game, target, row, col - 1);
 }
 
-static void	render_dynamic(t_game *game)
+void	render_dynamic(t_game *game)
 {
 	int	row;
 	int	col;
@@ -62,7 +62,7 @@ static void	render_dynamic(t_game *game)
 	flood_fill(game, 'E', row, col);
 }
 
-static void	render_static(t_game *game)
+void	render_static(t_game *game)
 {
 	int	row;
 	int	col;
@@ -73,12 +73,10 @@ static void	render_static(t_game *game)
 	flood_fill(game, '1', row, col);
 }
 
-void	render_game(t_game *game)
+void	run_game(t_game *game)
 {
-	render_static(game);
-	while (game->running)
-	{
-		handle_input_loop(game);
-		render_dynamic(game);
-	}
+	(void)game; // test
+	//handle_input_loop(game);
+	//render_dynamic(game);
+	
 }

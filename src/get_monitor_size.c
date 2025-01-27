@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_monitor_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 20:09:54 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 20:18:28 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:29:06 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 t_monitor	*get_monitor_size(void)
 {
 	t_monitor	*monitor;
-	int	prime_monitor;
 
-	prime_monitor = 0;
 	monitor = malloc(sizeof(t_monitor));
 	if(!monitor)
+	{
+		ft_putstr_fd("Error: memory allocation for monitor failed\n", 2);
 		return(NULL);
-	mlx_get_monitor_size(prime_monitor, monitor->width, monitor->height);
+	}
+	monitor->height = 0;
+	monitor->width = 0;
+
+	mlx_get_monitor_size(0, &monitor->width, &monitor->height);
+	
+	printf("get_monitor_size() monitor hight: %d\n", monitor->height); // test
+	printf("get_monitor_size() monitor wigth: %d\n", monitor->width); // test
+	return (monitor); 
 }

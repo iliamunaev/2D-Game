@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <stdio.h> // delete on production
 
 #include <MLX42/MLX42.h>
 #include "../libs/libft/libft.h"
@@ -64,9 +65,8 @@ typedef struct	s_map
 
 typedef struct s_monitor
 {
-	int32_t	index;
-	int32_t	*width;
-	int32_t	*height;
+	int32_t	width;
+	int32_t	height;
 }	t_monitor;
 
 typedef struct s_game
@@ -84,11 +84,13 @@ typedef struct s_game
 // Initialization and Setup
 t_map *load_map(const char *file_path, t_monitor *monitor);
 t_game	*init_game(t_map *map);
-void	render_game(t_game *game);
+void	run_game(t_game *game);
 bool	is_valid_file(const char *map_file);
 bool	is_validate_layout(t_map *map, t_monitor *monitor);
 void	load_textures(t_game *game);
 mlx_image_t	*get_img(t_game *game, const char *path);
+void	render_static(t_game *game);
+t_monitor	*get_monitor_size(void);
 
 // Game Loop and Rendering
 void	handle_input_loop(t_game *game);

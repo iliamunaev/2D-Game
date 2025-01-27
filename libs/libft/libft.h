@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 23:12:34 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/21 21:50:00 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:08:43 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 ssize_t	ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
+void	ft_strcpy(char *dest, const char *src);
+void	ft_strncpy(char *dest, const char *src, size_t n);
+
 
 #endif //LIBFT_H
