@@ -1,17 +1,17 @@
-#ifndef SO_LONG_H
-#define SO_LONG_H
+
+#ifndef TEST_SO_LONG_H
+#define TEST_SO_LONG_H
 
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 #include <MLX42/MLX42.h>
 #include "../libs/libft/libft.h"
 
 #define TILE_SIZE 32
-#define MAX_COLUMNS 24
-#define MAX_ROWS 32
 
 #define INIT_ERROR 2
 #define INIT_SUCCESS 3
@@ -79,28 +79,7 @@ typedef struct s_game
 	bool		running;		// Game loop flag
 }	t_game;
 
-
-// Function Prototypes
-// Initialization and Setup
-t_map *load_map(const char *file_path, t_monitor *monitor);
-t_game	*init_game(t_map *map);
-void	render_game(t_game *game);
-bool	is_valid_file(const char *map_file);
-bool	is_validate_layout(t_map *map, t_monitor *monitor);
-void	load_textures(t_game *game);
-mlx_image_t	*get_img(t_game *game, const char *path);
-
-// Game Loop and Rendering
-void	handle_input_loop(t_game *game);
-void render_tile(t_game *game, int x, int y);
-
-// Player Movement
-void move_player(t_game *game, int dx, int dy);
-
-// Cleanup and Exit
+t_game	*init_game(void);
 int	clean_up_game(t_game *game, t_map *map, char *msg, int exit_mark);
-
-// Utility
-void exit_with_error(const char *message);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:35:24 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 16:15:39 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:29:53 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ mlx_image_t	*get_img(t_game *game, const char *path)
 	img = mlx_texture_to_image(game->mlx, texture);
 	if(!img)
 	{
-		mlx_delete_texture(img);
+		mlx_delete_texture(texture);
 		// error
 	}
 

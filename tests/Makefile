@@ -1,19 +1,20 @@
-# --------------------------- Executable and Library ------------------------- #
-NAME    := so_long
+# Compiler and Flags
+NAME    := tdd
 
 CC      := cc
-CFLAGS  := -Wextra -Wall -Werror
+CFLAGS  := -Wextra -Wall -Werror -g
 
-LIBMLX  := ./libs/MLX42
-LIBFT   := ./libs/libft
+LIBMLX  := ../libs/MLX42
+LIBFT   := ../libs/libft
 
-HEADERS := -Iinclude -Ilibs/MLX42/include -I../include
-LIBS    := libs/MLX42/build/libmlx42.a libs/libft/libft.a -ldl -lglfw
+HEADERS := -Iinclude -I./libs/MLX42/include -I../libs/MLX42/include -I../include
+LIBS := ../libs/MLX42/build/libmlx42.a ../libs/libft/libft.a -ldl -lglfw
 
-SRCS    := $(shell find ./src -name "*.c")
+
+# Sources and Objects
+SRCS    := $(shell find -name "*.c")
 OBJS    := $(SRCS:.c=.o)
 
-# ------------------------------ Colors -------------------------------------- #
 RESET   := \033[0m
 GREEN   := \033[32m
 BLUE    := \033[34m

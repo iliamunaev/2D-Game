@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_up.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:45:54 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 19:59:09 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:59:40 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	clean_up_sprites(t_sprites *sprites)
 	free(sprites);
 }
 
-void	clean_up_game(t_game *game, t_map *map, char *msg, int exit_mark)
+int	clean_up_game(t_game *game, t_map *map, char *msg, int exit_mark)
 {
 	if(game)
 	{
@@ -60,4 +60,5 @@ void	clean_up_game(t_game *game, t_map *map, char *msg, int exit_mark)
 		ft_putstr_fd(msg,2);
 	if(exit_mark)
 		return(exit_mark);
+	return (0);
 }

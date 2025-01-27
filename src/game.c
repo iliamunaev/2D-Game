@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:20 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/26 13:36:21 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:30:19 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	move_player(t_game *game, int dx, int dy)
 
 	if (next_tile == 'E' && game->map->collectibles == 0)
 	{
-		printf("Congratulations! You've won the game in %d moves!\n", game->move_count);
+		ft_printf("Congratulations! You've won the game in %d moves!\n", game->move_count);
 		game->running = false;
 	}
 
