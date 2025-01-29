@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/29 16:14:18 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:39:26 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int32_t	main(void)
 
 	if (!(game->mlx = mlx_init(MAX_SCREEN_WIDTH, MAX_SCREEN_HEIGHT, "so_long", true)))
 	{		
-		// clean
 		return(EXIT_FAILURE);
 	}
 	else 

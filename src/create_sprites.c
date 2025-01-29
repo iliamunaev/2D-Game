@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:35:24 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/29 15:51:08 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:40:42 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ mlx_image_t	*get_img(t_game *game, const char *path)
 bool	load_textures(t_game *game)
 {
 	game->sprites->player = get_img(game, PATH_TO_PLAYER);
+	game->sprites->grass = get_img(game, PATH_TO_GRASS);
 	
 	printf("INFO: load_textures() sprite memory add: %p\n", game->sprites->player);  // test
 	
 
-	if(!game->sprites->player)
+	if(!game->sprites->player || !game->sprites->grass)
 	{
 		ft_putstr_fd("ERROR: load_textures(): load some textures failed\n", 2);
 		return (false);

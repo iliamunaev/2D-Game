@@ -17,22 +17,20 @@
 #define SPRITE_SIZE 64
 #define STEP 5
 
+#define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64) 
+#define MAX_ROWS (MAX_SCREEN_HEIGHT / 64) 
+
 #define PATH_TO_COLLECTIBLE "../sprites/collectible.png"
 #define PATH_TO_WALL "../sprites/wall.png"
 #define PATH_TO_EXIT "../sprites/collectible.png"
-#define PATH_TO_FLOOR "../sprites/floor.png"
+#define PATH_TO_GRASS "./sprites/grass.png"
 #define PATH_TO_PLAYER "./sprites/player.png"
 
-typedef struct	s_position
-{
-	int	y;
-	int	x;
-}	t_position;
 
 typedef struct	s_sprites
 {
 	mlx_image_t	*player;
-	t_position	*player_position;
+	mlx_image_t	*grass;
 	
 }	t_sprites;
 
