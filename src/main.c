@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/29 15:13:43 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:14:18 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,7 @@
 
 //	char map[67][120] = {0};
 
-void key_handler(void *param)
-{
-    t_game *game = (t_game *)param;
 
-    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-    {
-        mlx_close_window(game->mlx);
-		
-		//Deletes an image and removes it from the render queue.
-		mlx_delete_image(game->mlx, game->sprites->player);
-    }
-}
 
 
 int32_t	main(void)
