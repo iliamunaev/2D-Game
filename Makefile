@@ -23,17 +23,25 @@ RED     := \033[31m
 all: libmlx libft $(NAME)
 	@echo "$(GREEN)Program $(NAME) compiled successfully!$(RESET)"
 
+# Ensure MLX42 is downloaded and built, and Libft is cloned
 libmlx:
-	@echo "$(BLUE)[LIBMLX] Checking and building MLX42 library...$(RESET)"
+	@echo "$(BLUE)[LIBMLX] Checking for MLX42 library...$(RESET)"
 	@if [ ! -d "$(LIBMLX)" ]; then \
 		echo "$(RED)MLX42 not found! Downloading...$(RESET)"; \
 		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
 	fi
+	@echo "$(BLUE)[LIBMLX] Building MLX42 library...$(RESET)"
 	cmake $(LIBMLX) -B $(LIBMLX)/build
 	make -C $(LIBMLX)/build -j4
 
+# Ensure Libft is cloned (no need to build)
 libft:
-	@echo "$(BLUE)Building Libft library...$(RESET)"
+	@echo "$(BLUE)[LIBFT] Checking for Libft library...$(RESET)"
+	@if [ ! -d "$(LIBFT)" ]; then \
+		echo "$(RED)Libft not found! Cloning...$(RESET)"; \
+		git clone https://github.com/iliamunaev/libft-C-library $(LIBFT); \
+	fi
+	@echo "$(BLUE)[LIBFT] Building Libft library...$(RESET)"
 	make -C $(LIBFT)
 
 $(NAME): $(OBJS)
@@ -45,17 +53,17 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
-	@echo "$(GREEN) Removing object files...$(RESET)"
+	@echo "$(GREEN)Removing object files...$(RESET)"
 	rm -rf $(OBJS)
 	rm -rf $(LIBMLX)/build
 	@make -C $(LIBFT) clean
 	@echo "$(BLUE)Cleaned object files and directories.$(RESET)"
 
 fclean: clean
-	@echo "$(GREEN) '$(NAME)': Removing executable: $(NAME)...$(RESET)"
+	@echo "$(GREEN)Removing executable: $(NAME)...$(RESET)"
 	rm -rf $(NAME)
 	@make -C $(LIBFT) fclean
-	@echo "$(GREEN)'$(NAME)': executable successfully removed! $(RESET)"
+	@echo "$(GREEN)'$(NAME)' executable successfully removed!$(RESET)"
 
 re: fclean all
 

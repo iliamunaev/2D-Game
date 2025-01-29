@@ -1,77 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 19:59:26 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 15:03:32 by imunaev-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
 
-static int	init_player(t_game *game)
-{
-	t_player	*player;
 
-	player = malloc(sizeof(t_player));
-	if(!player)
-	{
-		return (INIT_ERROR);
-
-	}
-	player->y = 0;
-	player->x = 0;
-	player->collected = 0;
-	game->player = player;
-
-	return(INIT_SUCCESS);
-}
-t_game	*init_game(t_map *map)
+t_game	*init_game()
 {
 	t_game	*game;
+	t_sprites	*sprites;
 
 	game = malloc(sizeof(t_game));
 	if(!game)
 	{
-		ft_putstr_fd("init_game(): Error mem alloc for game\n", 2);
+		ft_putstr_fd("ERROR: init_game(): game memory allocation failed\n", 2);
 		return (NULL);
 	}
+	else
+		ft_putstr_fd("SUCCESS: init_game(): game memory allocation -> ok\n", 2);  // test
 
-	game->map = map;
+	game->running = 0;
 
-	game->mlx = mlx_init(game->map->columns * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true); // tested
-	if (!game->mlx)
+
+	sprites = malloc(sizeof(t_sprites));
+	if(!sprites)
 	{
-		ft_putstr_fd("init_game(): Error mlx_init\n", 2);
+		ft_putstr_fd("ERROR: init_game(): sprites memory allocation failed\n", 2);
 		return (NULL);
 	}
+	else 
+		ft_putstr_fd("SUCCESS: init_game(): sprites memory allocation -> ok\n", 2);  // test
 
-	game->sprites = malloc(sizeof(t_sprites));
-	if (!game->sprites)
-	{
-		ft_putstr_fd("init_game(): Error mem alloc for sprites\n", 2);
-		return (NULL);
-	}
-	
-	load_textures(game);  // in case of some failure, clean up end exit happens here
+	sprites->player = NULL;
+	printf("INFO: init_game() sprite memory init to NULL: %p\n", sprites->player);  // test
 
-	game->player = malloc(sizeof(t_player));
-	if (!game->player)
-	{
-		ft_putstr_fd("init_game(): Error mem alloc for player\n", 2);
-		return (NULL);
-	}
-	if(init_player(game) == INIT_ERROR)
-	{
-		// err msg
-		return (NULL);
-	}
-	game->move_count = 0;
-	game->running = true;
 
-	return(game);
+	game->sprites = sprites;
+	printf("INFO: init_game() sprite memory in t_game add: %p\n", game->sprites->player);  // test
+
+	return (game);
 }
-

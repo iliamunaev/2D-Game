@@ -6,69 +6,85 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 18:19:03 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:13:43 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+//	char map[67][120] = {0};
 
-void key_handler(struct mlx_key_data key_data, void *param)
+void key_handler(void *param)
 {
     t_game *game = (t_game *)param;
 
-    if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
+    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
     {
-        game->running = false; // Stop the game loop on ESC key press
+        mlx_close_window(game->mlx);
+		
+		//Deletes an image and removes it from the render queue.
+		mlx_delete_image(game->mlx, game->sprites->player);
     }
 }
 
-int	main(int ac, char **av)
+
+int32_t	main(void)
 {
-
-
 	t_game	*game;
-	t_map	*map;
-	t_monitor *monitor;
-    
-	if (ac != 2)
-		clean_up_game(NULL, NULL, "Error: no map attached\n", EXIT_FAILURE);
-	
-	monitor = get_monitor_size();	// tested
-	if(!monitor)
-		printf("get_monitor_size(): ERROR\n");
-	printf("monitor hight: %d\n", monitor->height);
-	printf("monitor wigth: %d\n", monitor->width);
 
-		
-		
-	map = load_map(av[1], monitor);
-	if(!map)
-		printf("load_map(): ERROR\n");
-	else
-		printf("load_map(): SUCCESS\n");
-	
-		
-	free(monitor);
-			
-	return 1;
-	
-	game = init_game(map);
-	
-	
+
+	game = init_game();
 	if(!game)
-		clean_up_game(game, map, "Error: game init failure\n", EXIT_FAILURE);
-	
-	render_static(game);	
-	run_game(game);
-	
-	mlx_key_hook(game->mlx, key_handler, &game->running);
-	
-	while (game->running)
-	{		
-		mlx_loop(game->mlx);
+	{
+		ft_putstr_fd("ERROR: main(): init_game()\n", 2);
+		return EXIT_FAILURE;
 	}
+	else 
+		ft_putstr_fd("SUCCESS: main(): init_game() -> ok\n", 2);
+		
+
+	if (!(game->mlx = mlx_init(MAX_SCREEN_WIDTH, MAX_SCREEN_HEIGHT, "so_long", true)))
+	{		
+		// clean
+		return(EXIT_FAILURE);
+	}
+	else 
+		ft_putstr_fd("SUCCESS: main(): mlx_init() -> ok\n", 2);  // test
+
+
+	if(!load_textures(game))
+	{	
+		ft_putstr_fd("ERROR: main(): load_textures()\n", 2);
+		return EXIT_FAILURE;
+	}
+	else
+		ft_putstr_fd("SUCCESS: main(): load_textures() -> ok\n", 2);  // test
+		
+
+
+	if (!render_game(game))
+	{
+		ft_putstr_fd("ERROR: main(): render_game()\n", 2);
+		return EXIT_FAILURE;
+	}
+	else
+		ft_putstr_fd("SUCCESS: main(): render_game() -> ok\n", 2);  // test
+
+
+
+	// key event handling
+	mlx_loop_hook(game->mlx, key_handler, game);
+
+	ft_putstr_fd("SUCCESS: main(): game is running!\n", 2);  // test
+	
+	// Start event loop
+	mlx_loop(game->mlx);	
+	
 	mlx_terminate(game->mlx);
 	
-	return(EXIT_SUCCESS);
+	ft_putstr_fd("SUCCESS: main(): game is terminated!\n", 2);  // test
+
+	
+	//cleanup_game(game);
+	return EXIT_SUCCESS;
 }
