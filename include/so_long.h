@@ -11,13 +11,11 @@
 #include "../libs/libft/libft.h"
 #include <stdio.h> /// for tests
 
-#define TILE_SIZE 32
-
 #define MAX_SCREEN_WIDTH 700 //3840
 #define MAX_SCREEN_HEIGHT 500 //2144
 
 #define SPRITE_SIZE 64
- 
+#define STEP 5
 
 #define PATH_TO_COLLECTIBLE "../sprites/collectible.png"
 #define PATH_TO_WALL "../sprites/wall.png"
