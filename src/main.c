@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/30 15:37:24 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:59:00 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 //	char map[67][120] = {0};
 
 
-int32_t	main(void)
+int32_t	main(int ac, char **av)
 {
-	t_game	*game;
+	(void)ac;
+	
+	t_game		*game;
+	t_map		*map;	
+	const char *file_path;
 
+	file_path = av[1];
+	
 	game = init_game();
 	if(!game)
 	{
@@ -37,6 +43,16 @@ int32_t	main(void)
 	}
 	else 
 		ft_putstr_fd("SUCCESS: main(): mlx_init()\n", 2);
+
+
+	map = load_map(file_path);
+	if(!map)
+	{		
+		ft_putstr_fd("ERROR: main(): load_map()\n", 2);
+		return(EXIT_FAILURE);
+	}
+	else 
+		ft_putstr_fd("SUCCESS: main(): load_map()\n", 2);
 
 
 	if(!load_textures(game))

@@ -17,6 +17,9 @@
 #define TILE_SIZE 64
 #define STEP 5
 
+#define INIT_ERROR	3
+#define INIT_SUCCESS 2
+
 #define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64) 
 #define MAX_ROWS (MAX_SCREEN_HEIGHT / 64) 
 
@@ -29,6 +32,8 @@
 typedef struct s_map
 {
 	char	**layout;
+	int		rows;
+	int		cols;
 	int		player;
 	int		collectables;
 	int 	exit;
@@ -36,6 +41,8 @@ typedef struct s_map
 	bool	is_exit_availble;
 	bool	is_collectebles_availble;	
 	bool	is_valid;
+
+
 }	t_map;
 
 typedef struct	s_sprites

@@ -16,7 +16,6 @@ bool	render_sprite(t_game *game, char target, int row, int col)
 {
 	mlx_image_t	*sprite = NULL;
 
-
 	if (target == 'G')
 		sprite = game->sprites->grass;
 	else if (target == 'P')
