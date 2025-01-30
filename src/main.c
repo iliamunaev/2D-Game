@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/29 17:39:26 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:37:24 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,28 @@
 //	char map[67][120] = {0};
 
 
-
-
 int32_t	main(void)
 {
 	t_game	*game;
-
 
 	game = init_game();
 	if(!game)
 	{
 		ft_putstr_fd("ERROR: main(): init_game()\n", 2);
 		return EXIT_FAILURE;
-	}
+	}	
 	else 
-		ft_putstr_fd("SUCCESS: main(): init_game() -> ok\n", 2);
-		
+		ft_putstr_fd("SUCCESS: main(): init_game()\n", 2);
+
+	
 
 	if (!(game->mlx = mlx_init(MAX_SCREEN_WIDTH, MAX_SCREEN_HEIGHT, "so_long", true)))
 	{		
+		ft_putstr_fd("ERROR: main(): mlx_init()\n", 2);
 		return(EXIT_FAILURE);
 	}
 	else 
-		ft_putstr_fd("SUCCESS: main(): mlx_init() -> ok\n", 2);  // test
+		ft_putstr_fd("SUCCESS: main(): mlx_init()\n", 2);
 
 
 	if(!load_textures(game))
@@ -46,21 +45,16 @@ int32_t	main(void)
 		return EXIT_FAILURE;
 	}
 	else
-		ft_putstr_fd("SUCCESS: main(): load_textures() -> ok\n", 2);  // test
+		ft_putstr_fd("SUCCESS: main(): load_textures()\n", 2);
 		
-
-
 	if (!render_game(game))
 	{
 		ft_putstr_fd("ERROR: main(): render_game()\n", 2);
 		return EXIT_FAILURE;
 	}
 	else
-		ft_putstr_fd("SUCCESS: main(): render_game() -> ok\n", 2);  // test
+		ft_putstr_fd("SUCCESS: main(): render_game()\n", 2);
 
-
-
-	// key event handling
 	mlx_loop_hook(game->mlx, key_handler, game);
 
 	ft_putstr_fd("SUCCESS: main(): game is running!\n", 2);  // test

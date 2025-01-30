@@ -11,10 +11,10 @@
 #include "../libs/libft/libft.h"
 #include <stdio.h> /// for tests
 
-#define MAX_SCREEN_WIDTH 700 //3840
-#define MAX_SCREEN_HEIGHT 500 //2144
+#define MAX_SCREEN_WIDTH 3840
+#define MAX_SCREEN_HEIGHT 2144
 
-#define SPRITE_SIZE 64
+#define TILE_SIZE 64
 #define STEP 5
 
 #define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64) 
@@ -26,6 +26,17 @@
 #define PATH_TO_GRASS "./sprites/grass.png"
 #define PATH_TO_PLAYER "./sprites/player.png"
 
+typedef struct s_map
+{
+	char	**layout;
+	int		player;
+	int		collectables;
+	int 	exit;
+	bool	is_surrounded_walls;
+	bool	is_exit_availble;
+	bool	is_collectebles_availble;	
+	bool	is_valid;
+}	t_map;
 
 typedef struct	s_sprites
 {
@@ -37,6 +48,7 @@ typedef struct	s_sprites
 typedef struct s_game
 {
 	mlx_t		*mlx;
+	t_map		*map;
 	t_sprites	*sprites;
 	bool		running;
 }	t_game;
