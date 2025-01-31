@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:59:26 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 15:03:32 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:23:39 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_game	*init_game(t_map *map)
 
 	game->map = map;
 
-	game->mlx = mlx_init(game->map->columns * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true); // tested
+	game->mlx = mlx_init(game->map->cols * TILE_SIZE, game->map->rows * TILE_SIZE, "So Long", true); // tested
 	if (!game->mlx)
 	{
 		ft_putstr_fd("init_game(): Error mlx_init\n", 2);
@@ -55,22 +55,6 @@ t_game	*init_game(t_map *map)
 		ft_putstr_fd("init_game(): Error mem alloc for sprites\n", 2);
 		return (NULL);
 	}
-	
-	load_textures(game);  // in case of some failure, clean up end exit happens here
-
-	game->player = malloc(sizeof(t_player));
-	if (!game->player)
-	{
-		ft_putstr_fd("init_game(): Error mem alloc for player\n", 2);
-		return (NULL);
-	}
-	if(init_player(game) == INIT_ERROR)
-	{
-		// err msg
-		return (NULL);
-	}
-	game->move_count = 0;
-	game->running = true;
 
 	return(game);
 }

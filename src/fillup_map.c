@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillup_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:51:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/31 17:27:18 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:29:38 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	fillup_layout(t_map *map, t_temp_map *temp_map)
 {
 	int	i;
-	
+
 	map->map = malloc(map->rows * sizeof(char *));
 	if (!map->map)
 	{
@@ -25,7 +25,7 @@ int	fillup_layout(t_map *map, t_temp_map *temp_map)
 	}
 	else
 		ft_putstr_fd("SUCCESS: fillup_layout(): map->map malloc()\n", 2);
-	
+
 	i = 0;
 	while(i < map->rows)
 	{
@@ -33,7 +33,7 @@ int	fillup_layout(t_map *map, t_temp_map *temp_map)
 		if (!map->map[i])
 		{
 			ft_putstr_fd("ERROR: fillup_map(): strdup() failed\n", 2);
-			while (--i >= 0) 
+			while (--i >= 0)
 				free(map->map[i]);
 			free(map->map);
 			map->map = NULL;
@@ -41,22 +41,11 @@ int	fillup_layout(t_map *map, t_temp_map *temp_map)
 		}
 		i++;
 	}
-	return(INIT_SUCCESS);	
+	return(INIT_SUCCESS);
 }
 
-t_map	*fillup_map(t_temp_map *temp_map)
+int fillup_map(t_map *map, t_temp_map *temp_map)
 {
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if(!map)
-	{
-		ft_putstr_fd("ERROR: fillup_map(): malloc() failed\n", 2);
-		return (NULL);
-	}
-	else 
-		ft_putstr_fd("SUCCESS: fillup_map(): malloc() -> ok\n", 2);
-	
 
 	map->rows = temp_map->rows;
 	map->cols = temp_map->cols;
@@ -66,14 +55,14 @@ t_map	*fillup_map(t_temp_map *temp_map)
 	if(fillup_layout(map, temp_map) == INIT_ERROR)
 	{
 		ft_putstr_fd("ERROR: fillup_map(): fillup_layout() failed\n", 2);
-		return (NULL);
+		return (INIT_ERROR);
 	}
-	else 
+	else
 		ft_putstr_fd("SUCCESS: fillup_map(): fillup_layout() -> ok\n", 2);
-	
-	
+
+
 	// free(temp_map);
-	
-	return (map);
+
+	return (INIT_SUCCESS);
 }
 

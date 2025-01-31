@@ -20,8 +20,8 @@
 #define INIT_ERROR	3
 #define INIT_SUCCESS 2
 
-#define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64) 
-#define MAX_ROWS (MAX_SCREEN_HEIGHT / 64) 
+#define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64)
+#define MAX_ROWS (MAX_SCREEN_HEIGHT / 64)
 
 #define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
 #define PATH_TO_WALL "./sprites/wall.png"
@@ -38,8 +38,8 @@ typedef struct s_temp_map
 	int		collects; // must at least 1
 	int 	exit;  // must 1
 	bool	is_walls; // must surr
-	bool	is_exit_availble;   
-	bool	is_collects_availble;	
+	bool	is_exit_availble;
+	bool	is_collects_availble;
 	bool	is_valid;
 }	t_temp_map;
 
@@ -69,7 +69,7 @@ typedef struct s_game
 	bool		is_exit;
 	bool		is_running;
 }	t_game;
-    
+
 typedef struct s_program
 {
 	t_temp_map	*temp_map;
@@ -82,7 +82,7 @@ typedef struct s_program
 t_map	*load_map(const char *map_file);
 t_temp_map	*init_temp_map(const char *map_file);
 int	init_map(const char *map_file, t_map *map);
-t_map	*fillup_map(t_temp_map *temp_map);
+int	fillup_map(t_map *map, t_temp_map *temp_map);
 int	init_layout(const char *map_file, t_temp_map *temp_map);
 
 t_sprites	*load_sprites(t_game *game);
