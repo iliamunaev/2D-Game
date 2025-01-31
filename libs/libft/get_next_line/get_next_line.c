@@ -6,11 +6,11 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 20:39:00 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 17:01:05 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:54:08 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <stdio.h> // test
 
 #include "get_next_line.h"
 
@@ -108,6 +108,14 @@ char	*get_next_line(int fd)
 	if (!read_until_newline(fd, &temp_buf))
 		return (NULL);	
 	line = extract_line(temp_buf);
+	if (!line)
+	{
+		free (temp_buf);
+		temp_buf = (NULL);
+		return (NULL);
+	}	
 	temp_buf = update_temp_buf(temp_buf);
+	printf("in get_next_line: [%s]\n", line);  // test
+
 	return (line);
 }
