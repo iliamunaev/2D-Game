@@ -23,33 +23,41 @@
 #define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64) 
 #define MAX_ROWS (MAX_SCREEN_HEIGHT / 64) 
 
-#define PATH_TO_COLLECTIBLE "../sprites/collectible.png"
-#define PATH_TO_WALL "../sprites/wall.png"
-#define PATH_TO_EXIT "../sprites/collectible.png"
-#define PATH_TO_GRASS "./sprites/grass.png"
+#define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
+#define PATH_TO_WALL "./sprites/wall.png"
+#define PATH_TO_EXIT "./sprites/exit.png"
+#define PATH_TO_FLOOR "./sprites/floor.png"
 #define PATH_TO_PLAYER "./sprites/player.png"
+
+typedef struct s_temp_map
+{
+	char	**layout;
+	int		rows; // must more 2
+	int		cols; // must more 3
+	int		player; // must 1
+	int		collects; // must at least 1
+	int 	exit;  // must 1
+	bool	is_walls; // must surr
+	bool	is_exit_availble;   
+	bool	is_collects_availble;	
+	bool	is_valid;
+}	t_temp_map;
 
 typedef struct s_map
 {
-	char	**layout;
+	char	**map;
 	int		rows;
 	int		cols;
-	int		player;
-	int		collectables;
-	int 	exit;
-	bool	is_surrounded_walls;
-	bool	is_exit_availble;
-	bool	is_collectebles_availble;	
-	bool	is_valid;
-
-
+	int		collects;
 }	t_map;
 
 typedef struct	s_sprites
 {
 	mlx_image_t	*player;
-	mlx_image_t	*grass;
-	
+	mlx_image_t	*floor;
+	mlx_image_t	*wall;
+	mlx_image_t	*collects;
+	mlx_image_t	*exit;
 }	t_sprites;
 
 typedef struct s_game
@@ -57,20 +65,31 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_map		*map;
 	t_sprites	*sprites;
-	bool		running;
+	int 		collects;
+	bool		is_exit;
+	bool		is_running;
 }	t_game;
     
+typedef struct s_program
+{
+	t_temp_map	*temp_map;
+	t_map		*map;
+	t_game		*game;
+}	t_program;
 
 
 
+t_map	*load_map(const char *map_file);
+t_temp_map	*init_temp_map(const char *map_file);
+int	init_map(const char *map_file, t_map *map);
+t_map	*fillup_map(t_temp_map *temp_map);
+int	init_layout(const char *map_file, t_temp_map *temp_map);
 
-t_game	*init_game();
-mlx_image_t	*get_img(t_game *game, const char *path);
-bool	load_textures(t_game *game);
-bool	render_game(t_game *game);
-void run_game(t_game *game);
+t_sprites	*load_sprites(t_game *game);
+
+t_game	*init_game(t_map *map);
+int	render_game(t_game *game, t_sprites *sprites);
+
 void key_handler(void *param);
-
-
 
 #endif
