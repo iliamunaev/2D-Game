@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:51:36 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/31 18:42:58 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/01 10:41:38 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ int	init_layout(const char *map_file, t_temp_map *temp_map)
 	}
 
 	temp_map->layout[temp_map->rows] = NULL;
-	temp_map->cols = ft_strlen(temp_map->layout[0]);
+	temp_map->cols = ft_strlen(temp_map->layout[0]) - 1;
 	printf("in temp_map: %s\n", temp_map->layout[temp_map->rows]);
 
-	//return (INIT_ERROR);	// TESTING FROM HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-	close(fd);
-	
+	close(fd);	
 	return(INIT_SUCCESS);
 }

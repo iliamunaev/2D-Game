@@ -107,14 +107,6 @@ int	render_game(t_game *game, t_sprites *sprites)
 	}
 	ft_putstr_fd("SUCCESS: render_game(): game->sprites -> ok\n", 2);
 
-/*	// Render the floor
-	if (!render(game, '0'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): floor \n", 2);
-		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): floor -> ok\n", 2);
-*/
 	if (!render_floor(game, '0'))
 	{		
 		ft_putstr_fd("ERROR: render_game(): floor \n", 2);
@@ -153,8 +145,6 @@ int	render_game(t_game *game, t_sprites *sprites)
 		return (EXIT_FAILURE);
 	}
 	ft_putstr_fd("SUCCESS: render_game(): player -> ok\n", 2);
-
-
 
 	ft_putstr_fd("SUCCESS: render_game(): Rendering complete\n", 2);
 	return (EXIT_SUCCESS);

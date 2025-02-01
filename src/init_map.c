@@ -3,25 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 12:33:15 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/31 21:36:03 by imunaev-         ###   ########.fr       */
+/*   Created: 2025/01/26 13:36:13 by imunaev-          #+#    #+#             */
+/*   Updated: 2025/02/01 10:40:32 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 
-int	init_map(const char *map_file, t_map *map)
+
+t_map	*init_map(const char *map_file)
 {
+	t_map	*map;
 	t_temp_map	*temp_map;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+	{
+		ft_putstr_fd("ERROR: load_map() map mem alloc failed\n", 2);
+		return(NULL);
+	}
+	else
+		ft_putstr_fd("SUCCESS: load_map() map mem alloc\n", 2);
 
 	temp_map = init_temp_map(map_file);
 	if(!temp_map)
 	{
 		ft_putstr_fd("ERROR: init_map(): init_temp_map failed\n", 2);
-		return (INIT_ERROR);
+		return (NULL);
 	}
 	else
 		ft_putstr_fd("SUCCESS: init_map(): init_temp_map -> ok\n", 2);
@@ -31,12 +42,10 @@ int	init_map(const char *map_file, t_map *map)
 	if(fillup_map(map, temp_map) == INIT_ERROR)
 	{
 		ft_putstr_fd("ERROR: init_map(): fillup_map() failed\n", 2);
-		return (INIT_ERROR);
+		return (NULL);
 	}
 	else
 		ft_putstr_fd("SUCCESS: init_map(): fillup_map() -> ok\n", 2);  // test
 
-	// free temp_map
-
-	return (INIT_SUCCESS);
+	return (map);
 }

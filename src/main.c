@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/31 16:03:27 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/01 10:39:19 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int32_t	main(int ac, char **av)
 	*/
 
 	// Step 1: load map
-	map = load_map(map_file);
+	map = init_map(map_file);
 	if(!map)
 	{		
 		ft_putstr_fd("ERROR: main(): load_map()\n", 2);

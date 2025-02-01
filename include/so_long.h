@@ -79,9 +79,8 @@ typedef struct s_program
 
 
 
-t_map	*load_map(const char *map_file);
+t_map	*init_map(const char *map_file);
 t_temp_map	*init_temp_map(const char *map_file);
-int	init_map(const char *map_file, t_map *map);
 int	fillup_map(t_map *map, t_temp_map *temp_map);
 int	init_layout(const char *map_file, t_temp_map *temp_map);
 
