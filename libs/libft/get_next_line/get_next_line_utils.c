@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 09:52:22 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/27 15:59:24 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/01/30 23:11:08 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 /*
 ** Joins two strings 's1' and 's2' into a new string.
@@ -37,6 +36,3 @@ char	*ft_strjoin_and_free(char *s1, char *s2)
 	free(s1);
 	return (new_str);
 }
-
-
-

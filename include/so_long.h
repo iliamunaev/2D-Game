@@ -22,6 +22,14 @@
 #define MAX_COLUMNS (MAX_SCREEN_WIDTH / 64)
 #define MAX_ROWS (MAX_SCREEN_HEIGHT / 64)
 
+#define AXE_X 0
+#define AXE_Y 1
+
+#define COLLECTIBLE 'C'
+#define EXIT 'E'
+#define PLAYER 'P'
+
+
 #define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
 #define PATH_TO_WALL "./sprites/wall.png"
 #define PATH_TO_EXIT "./sprites/exit.png"
@@ -33,13 +41,7 @@ typedef struct s_temp_map
 	char	**layout;
 	int		rows; // must more 2
 	int		cols; // must more 3
-	int		player; // must 1
 	int		collects; // must at least 1
-	int 	exit;  // must 1
-	bool	is_walls; // must surr
-	bool	is_exit_availble;
-	bool	is_collects_availble;
-	bool	is_valid;
 }	t_temp_map;
 
 typedef struct s_map
@@ -84,9 +86,11 @@ int	fillup_map(t_map *map, t_temp_map *temp_map);
 int	init_layout(const char *map_file, t_temp_map *temp_map);
 
 t_sprites	*load_sprites(t_game *game);
-
+bool	render_sprite(t_game *game, char target, int row, int col);
 t_game	*init_game(t_map *map);
 int	render_game(t_game *game, t_sprites *sprites);
-
+bool	render_floor(t_game *game, char target);
 void	key_handler(mlx_key_data_t keydata, void *param);
+
+bool  is_valid(t_temp_map *temp_map);
 #endif

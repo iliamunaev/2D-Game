@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static bool	render_sprite(t_game *game, char target, int row, int col)
+bool	render_sprite(t_game *game, char target, int row, int col)
 {
 	mlx_image_t	*sprite;
 
@@ -72,7 +72,7 @@ static bool	render(t_game *game, char target)
 	}
 	return (true);
 }
-static bool	render_floor(t_game *game, char target)
+bool	render_floor(t_game *game, char target)
 {
 	int	x;
 	int	y;

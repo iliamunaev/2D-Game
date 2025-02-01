@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 11:22:17 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:58:03 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int32_t	main(int ac, char **av)
 	
 	ft_putstr_fd("SUCCESS: main(): game is terminated!\n", 2);  // test
 
+    ft_printf("See you!\n");
 	
 	//cleanup_game(game);
 	return EXIT_SUCCESS;

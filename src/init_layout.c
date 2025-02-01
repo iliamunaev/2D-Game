@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:51:36 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 10:41:38 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:06:07 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	init_layout(const char *map_file, t_temp_map *temp_map)
 	while(1)
 	{
 		line = get_next_line(fd);
-		printf("[%s]\n", line);
 
 		if(!line)
 			break;	
@@ -46,7 +45,6 @@ int	init_layout(const char *map_file, t_temp_map *temp_map)
 		
 		temp_map->layout[temp_map->rows] = line;	
 		
-		printf("in temp_map: %s\n", temp_map->layout[temp_map->rows]);
 		
 		if (!temp_map->layout[temp_map->rows])
 		{
@@ -58,7 +56,7 @@ int	init_layout(const char *map_file, t_temp_map *temp_map)
 
 	temp_map->layout[temp_map->rows] = NULL;
 	temp_map->cols = ft_strlen(temp_map->layout[0]) - 1;
-	printf("in temp_map: %s\n", temp_map->layout[temp_map->rows]);
+
 
 	close(fd);	
 	return(INIT_SUCCESS);
