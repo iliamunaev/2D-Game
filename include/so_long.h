@@ -15,7 +15,7 @@
 #define MAX_SCREEN_HEIGHT 2144
 
 #define TILE_SIZE 64
-#define STEP 5
+#define STEP 64
 
 #define INIT_ERROR	3
 #define INIT_SUCCESS 2
@@ -89,6 +89,5 @@ t_sprites	*load_sprites(t_game *game);
 t_game	*init_game(t_map *map);
 int	render_game(t_game *game, t_sprites *sprites);
 
-void key_handler(void *param);
-
+void	key_handler(mlx_key_data_t keydata, void *param);
 #endif
