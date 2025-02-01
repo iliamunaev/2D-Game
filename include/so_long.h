@@ -9,7 +9,6 @@
 
 #include <MLX42/MLX42.h>
 #include "../libs/libft/libft.h"
-#include <stdio.h> /// for tests
 
 #define MAX_SCREEN_WIDTH 3840
 #define MAX_SCREEN_HEIGHT 2144
@@ -66,8 +65,8 @@ typedef struct s_game
 	t_map		*map;
 	t_sprites	*sprites;
 	int 		collects;
+	int			moves;
 	bool		is_exit;
-	bool		is_running;
 }	t_game;
 
 typedef struct s_program

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:15:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/01/31 21:52:27 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:54:28 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ t_game	*init_game(t_map *map)
 	game->map = map;
 	game->sprites = NULL;
 	game->collects = map->collects;
+	game->moves = 0;
 	game->is_exit = false;
-	game->is_running = false;
-
 
 	return (game);
 }
