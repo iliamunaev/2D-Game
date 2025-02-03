@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 11:58:03 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:08:56 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int32_t	main(int ac, char **av)
 		ft_putstr_fd("SUCCESS: main(): render_game()\n", 2);
 	
 	// Step 5: run the game
-	mlx_key_hook(game->mlx, key_handler, game);
+	//mlx_key_hook(game->mlx, key_handler, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 
 	ft_putstr_fd("SUCCESS: main(): game is running!\n", 2);  // test
 	

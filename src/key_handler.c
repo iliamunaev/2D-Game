@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:15:23 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 16:16:05 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:15:43 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,69 +45,88 @@ bool		is_collectable(char collectable)
 	return(collectable == 'C');
 }
 
-void	process_action(t_game *game, char **target, int y, int x, int direction, int axe)
+void process_action(t_game *game, char **target, int direction, int axe)
 {
-    if (axe == AXE_X)  
+    int x, y, next_x, next_y;
+
+    x = game->sprites->player->instances[0].x;
+    y = game->sprites->player->instances[0].y;
+
+    if (axe == AXE_Y)
     {
-        if (target[y][x + direction] != '1') 
-        {
-            if(target[y][x + direction] == 'E' && game->collects == 0)
-            {
-    	        ft_printf("You win!\n");
-                //free_game_resources(game);
-                mlx_close_window(game->mlx);
-            } 
-            game->sprites->player->instances[0].x += (STEP * direction);
-            game->moves++;
-            if (is_collectable(target[y][x + direction]))
-                get_collectable(game, y, x + direction);
-        }
-    	ft_printf("Movements count: %d\n", game->moves);
+        next_x = x;
+        next_y = y + direction * STEP;		
     }
-    else if (axe == AXE_Y)
+    else
     {
-        if (target[y + direction][x] != '1')
-        {
-            if(target[y + direction][x] == 'E' && game->collects == 0)
-            {
-    	        ft_printf("You win!\n");
-                //free_game_resources(game);
-                mlx_close_window(game->mlx);
-            } 
-            game->sprites->player->instances[0].y += (STEP * direction);
-            game->moves++;
-            if (is_collectable(target[y + direction][x]))
-                get_collectable(game, y + direction, x);
-        }
-    	ft_printf("Movements count: %d\n", game->moves);		
-    }	
+        next_x = x + direction * STEP;
+        next_y = y;		
+    }
+
+    // Compute all 4 corner positions
+    int next_grid_top_left_x  = next_x / TILE_SIZE;
+    int next_grid_top_left_y  = next_y / TILE_SIZE;
+
+    int next_grid_top_right_x  = (next_x + TILE_SIZE - 1) / TILE_SIZE;
+    int next_grid_top_right_y  = next_y / TILE_SIZE;
+
+    int next_grid_bottom_left_x  = next_x / TILE_SIZE;
+    int next_grid_bottom_left_y  = (next_y + TILE_SIZE - 1) / TILE_SIZE;
+
+    int next_grid_bottom_right_x  = (next_x + TILE_SIZE - 1) / TILE_SIZE;
+    int next_grid_bottom_right_y  = (next_y + TILE_SIZE - 1) / TILE_SIZE;
+
+
+	
+    if (target[next_grid_top_left_y][next_grid_top_left_x] == '1' ||
+        target[next_grid_top_right_y][next_grid_top_right_x] == '1' ||
+        target[next_grid_bottom_left_y][next_grid_bottom_left_x] == '1' ||
+        target[next_grid_bottom_right_y][next_grid_bottom_right_x] == '1')
+    {
+        return ;
+    }
+
+    // Convert new position to grid coordinates
+    int next_grid_x = next_x / TILE_SIZE;
+    int next_grid_y = next_y / TILE_SIZE;
+
+    // Collectible check
+    if (is_collectable(target[next_grid_y][next_grid_x]))
+        get_collectable(game, next_grid_y, next_grid_x);
+
+    // is_collectable
+    if (target[next_grid_y][next_grid_x] == 'E' && game->collects == 0)
+    {
+        ft_printf("You win!\n");
+        mlx_close_window(game->mlx);
+        return;
+    }
+
+    game->sprites->player->instances[0].x = next_x;
+    game->sprites->player->instances[0].y = next_y;
+    game->moves++;
+    
+    ft_printf("Movements count: %d\n", game->moves);
 }
 
-void	key_handler(mlx_key_data_t keydata, void *param)
+
+
+void game_loop(void *param)
 {
-    t_game *game;
-    int grid_x;
-	int grid_y;
-	char **target;
-	
-    game = (t_game *)param;
-	target = game->map->map;
-    grid_x = game->sprites->player->instances[0].x / TILE_SIZE;
-    grid_y = game->sprites->player->instances[0].y / TILE_SIZE;
-    if (keydata.action == MLX_PRESS)
+    t_game *game = (t_game *)param;
+    char **target = game->map->map;
+
+    if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(game->mlx, MLX_KEY_D))
+        process_action(game, target,  1, AXE_X);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) || mlx_is_key_down(game->mlx, MLX_KEY_A))
+        process_action(game, target,  -1, AXE_X);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN) || mlx_is_key_down(game->mlx, MLX_KEY_S))
+        process_action(game, target,  1, AXE_Y);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_UP) || mlx_is_key_down(game->mlx, MLX_KEY_W))
+        process_action(game, target,  -1, AXE_Y);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
     {
-		if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_D)
-			process_action(game, target, grid_y, grid_x, 1, AXE_X);   
-        if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_A)
-			process_action(game, target, grid_y, grid_x, -1, AXE_X);
-        if (keydata.key == MLX_KEY_DOWN || keydata.key == MLX_KEY_S)
-			process_action(game, target, grid_y, grid_x, 1, AXE_Y);
-        if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_W)
-			process_action(game, target, grid_y, grid_x, -1, AXE_Y);
-        if (keydata.key == MLX_KEY_ESCAPE)
-        {
-            //free_game_resources(game); // Ensure memory cleanup
-            mlx_close_window(game->mlx);
-        }
+      //  free_game_resources(game);
+        mlx_close_window(game->mlx);
     }
 }

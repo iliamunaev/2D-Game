@@ -14,7 +14,9 @@
 #define MAX_SCREEN_HEIGHT 2144
 
 #define TILE_SIZE 64
-#define STEP 64
+#define STEP 4
+
+#define MOVE_DELAY_FRAMES 10
 
 #define INIT_ERROR	3
 #define INIT_SUCCESS 2
@@ -51,7 +53,21 @@ typedef struct s_map
 	int		cols;
 	int		collects;
 }	t_map;
+/*
+typedef struct s_coorinates
+{
+	int	x;
+	int y;
+}	t_coorinates;
 
+typedef struct s_position
+{
+	int	*up_left;
+	int *up_right;
+	int *down_left;
+	int *down_right;
+}	t_position;
+*/
 typedef struct	s_sprites
 {
 	mlx_image_t	*player;
@@ -66,6 +82,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_map		*map;
 	t_sprites	*sprites;
+	//t_position	*position;
 	int 		collects;
 	int			moves;
 	bool		is_exit;
@@ -93,4 +110,6 @@ bool	render_floor(t_game *game, char target);
 void	key_handler(mlx_key_data_t keydata, void *param);
 
 bool  is_valid(t_temp_map *temp_map);
+
+void game_loop(void *param);
 #endif
