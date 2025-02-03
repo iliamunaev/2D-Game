@@ -16,7 +16,6 @@
 #define TILE_SIZE 64
 #define STEP 4
 
-#define MOVE_DELAY_FRAMES 10
 
 #define INIT_ERROR	3
 #define INIT_SUCCESS 2
@@ -53,21 +52,23 @@ typedef struct s_map
 	int		cols;
 	int		collects;
 }	t_map;
-/*
-typedef struct s_coorinates
-{
-	int	x;
-	int y;
-}	t_coorinates;
 
-typedef struct s_position
+typedef struct s_corner
 {
-	int	*up_left;
-	int *up_right;
-	int *down_left;
-	int *down_right;
-}	t_position;
-*/
+	int	top_left_y;
+	int	top_left_x;
+
+	int	top_right_y;
+	int	top_right_x;
+
+	int	bottom_left_y;
+	int	bottom_left_x;
+
+	int	bottom_right_y;
+	int	bottom_right_x;
+}	t_corner;
+
+
 typedef struct	s_sprites
 {
 	mlx_image_t	*player;
@@ -82,7 +83,6 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_map		*map;
 	t_sprites	*sprites;
-	//t_position	*position;
 	int 		collects;
 	int			moves;
 	bool		is_exit;
@@ -107,7 +107,6 @@ bool	render_sprite(t_game *game, char target, int row, int col);
 t_game	*init_game(t_map *map);
 int	render_game(t_game *game, t_sprites *sprites);
 bool	render_floor(t_game *game, char target);
-void	key_handler(mlx_key_data_t keydata, void *param);
 
 bool  is_valid(t_temp_map *temp_map);
 
