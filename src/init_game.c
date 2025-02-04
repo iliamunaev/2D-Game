@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:15:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 11:54:28 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:24:51 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,21 @@ t_game	*init_game(t_map *map)
 	game = malloc(sizeof(t_game));
 	if(!game)
 	{
-		ft_putstr_fd("ERROR: init_game(): game memory allocation failed\n", 2);
+		ft_putstr_fd("Error: init_game -> malloc game memory allocation failed\n", 2);
 		return (NULL);
 	}
-	else
-		ft_putstr_fd("SUCCESS: init_game(): game memory allocation -> ok\n", 2);
-
-	printf("INFO: init_game()map->rows %d, map->cols: %d\n", map->rows, map->cols);
-
-	printf("INFO: mlx_init() window size: %d x %d\n", map->cols * TILE_SIZE, map->rows * TILE_SIZE);
-
-
 	game->mlx = mlx_init(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "So Long", true);
 	if (!game->mlx)
 	{
-		ft_putstr_fd("ERROR: init_game(): mlx_init\n", 2);
+		free_map(map);
+		free(game);
+		ft_putstr_fd("Error: init_game -> mlx_init failed\n", 2);
 		return (NULL);
 	}
-	else
-		ft_putstr_fd("SUCCESS: init_game(): mlx_init\n", 2);
-
 	game->map = map;
 	game->sprites = NULL;
 	game->collects = map->collects;
 	game->moves = 0;
 	game->is_exit = false;
-
 	return (game);
 }

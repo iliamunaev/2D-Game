@@ -57,17 +57,13 @@ typedef struct s_corner
 {
 	int	top_left_y;
 	int	top_left_x;
-
 	int	top_right_y;
 	int	top_right_x;
-
 	int	bottom_left_y;
 	int	bottom_left_x;
-
 	int	bottom_right_y;
 	int	bottom_right_x;
 }	t_corner;
-
 
 typedef struct	s_sprites
 {
@@ -88,14 +84,6 @@ typedef struct s_game
 	bool		is_exit;
 }	t_game;
 
-typedef struct s_program
-{
-	t_temp_map	*temp_map;
-	t_map		*map;
-	t_game		*game;
-}	t_program;
-
-
 
 t_map	*init_map(const char *map_file);
 t_temp_map	*init_temp_map(const char *map_file);
@@ -113,4 +101,9 @@ bool  is_valid(t_temp_map *temp_map);
 void game_loop(void *param);
 
 void	free_temp_map(t_temp_map *temp_map);
+void	free_map(t_map *map);
+
+bool	is_collectable(char collectable);
+t_corner *init_corners(int next_x, int next_y);
+
 #endif

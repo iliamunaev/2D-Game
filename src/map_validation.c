@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:55:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 12:02:24 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:24:45 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ bool  is_valid(t_temp_map *temp_map)
 		{
 			return (true);			
 		}
-	//free_temp_map(temp_map);
 	return (false);	
 }
 // is_rectangular()
