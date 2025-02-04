@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:51:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 15:23:37 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:56:21 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	fillup_layout(t_map *map, t_temp_map *temp_map)
 	{
 		ft_putstr_fd("Error: fillup_layout -> malloc 'map->rows' failed\n", 2);
 		free(map);
-		return (INIT_ERROR);
+		return (EXIT_FAILURE);
 	}
 	i = 0;
 	while(i < map->rows)
@@ -34,11 +34,11 @@ int	fillup_layout(t_map *map, t_temp_map *temp_map)
 				free(map->map[i]);
 			free(map->map);
 			map->map = NULL;
-			return (INIT_ERROR);
+			return (EXIT_FAILURE);
 		}
 		i++;
 	}
-	return(INIT_SUCCESS);
+	return(EXIT_SUCCESS);
 }
 
 int fillup_map(t_map *map, t_temp_map *temp_map)
@@ -48,9 +48,9 @@ int fillup_map(t_map *map, t_temp_map *temp_map)
 	map->collects = temp_map->collects;
 	map->map = NULL;
 
-	if(fillup_layout(map, temp_map) == INIT_ERROR)
+	if(fillup_layout(map, temp_map) == EXIT_FAILURE)
 	{
-		return (INIT_ERROR);
+		return (EXIT_FAILURE);
 	}
-	return (INIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

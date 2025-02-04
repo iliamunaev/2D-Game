@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:20:28 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:30:37 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:55:42 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	load_textures(t_game *game, t_sprites *sprites)
 		&& sprites->collects && sprites->exit))
 	{
 		ft_putstr_fd("Error: load_textures -> load textures failed\n", 2);
-		return (INIT_ERROR);
+		return (EXIT_FAILURE);
 	}
-	return (INIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 t_sprites	*load_sprites(t_game *game)
@@ -68,7 +68,7 @@ t_sprites	*load_sprites(t_game *game)
 	sprites->collects = NULL;
 	sprites->exit = NULL;
 
-	if(load_textures(game, sprites) == INIT_ERROR)
+	if(load_textures(game, sprites) == EXIT_FAILURE)
 	{
 		free(sprites);
 		ft_putstr_fd("ERROR: load_sprites(): load_textures\n", 2);

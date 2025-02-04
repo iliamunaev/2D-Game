@@ -16,11 +16,11 @@
 #define TILE_SIZE 64
 #define STEP 4
 
-#define INIT_ERROR	3
-#define INIT_SUCCESS 2
+// #define INIT_ERROR	3
+// #define INIT_SUCCESS 2
 
-#define MAX_COLUMNS (MAX_SCREEN_WIDTH / TILE_SIZE)
-#define MAX_ROWS (MAX_SCREEN_HEIGHT / TILE_SIZE)
+#define MAX_COLUMNS 60
+#define MAX_ROWS 32
 
 #define AXE_X 0
 #define AXE_Y 1
@@ -98,5 +98,7 @@ void		free_temp_map(t_temp_map *temp_map);
 void		free_map(t_map *map);
 bool		is_collectable(char collectable);
 t_corner	*init_corners(int next_x, int next_y);
+void	trim_2d_array(char **arr);
+int fillup_temp_map(t_temp_map *temp_map, const char *map_file);
 
 # endif

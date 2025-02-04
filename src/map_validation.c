@@ -6,29 +6,67 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:55:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 12:24:45 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:53:34 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+/*
+void	restore_temp_map(temp_map)
+{
+	
+}
 
-// check exit availble and all coll  availbl is runct, walls
+bool	is_char_mathed(t_temp_map *temp_map, char target, int row, int col)
+{
 
+	if(temp_map->layout[row][col] != target)
+	{
+	}
+	
+	if (temp_map->layout[row][col] == target)
+	{
+		restore_temp_map(temp_map);
+		return (true);
+	}
+	is_char_mathed(temp_map, target, row, col);
+	
+}
+	
+bool	find_path(t_temp_map *temp_map, int row, int col)
+{
+	char	target;
+	bool	path;
 
+	target = 'E';		
+	path = is_char_mathed(temp_map, target, row, col);
+	return (path);		
+}
+bool	is_exit_available(t_temp_map *temp_map)
+{
+	int	y;
+	int	x;
 
-
-// bool is_rows_columns_valid(t_temp_map *temp_map)
-// {
-// 	if(temp_map->rows < 3 || temp_map->cols < 3)
-// 	{
-// 		ft_putstr_fd("ERROR: The map is too small!\n",  2);
-// 		return (false);
-// 	}
-// 	return (true);	
-// }
-
-
-
+	y = 0;
+	while(temp_map->layout[y])
+	{
+		x = 0;
+		while(temp_map->layout[y][x])
+		{
+			if(temp_map->layout[y][x] == 'P')
+				break ;
+			x++;
+		}
+		y++;
+	}
+	if(!find_path(temp_map, y, x))
+	{
+		ft_putstr_fd("Error: Left wall not closed!\n", 2);
+		return (false);		
+	}
+		
+}
+*/
 bool	is_left_n_right_wall(t_temp_map *temp_map)
 {
 	int	i;
@@ -140,16 +178,48 @@ bool	is_invalid_char(t_temp_map *temp_map)
 	return(true);
 }
 
+bool	is_in_max_columns(t_temp_map *temp_map)
+{
+	if(temp_map->cols > MAX_COLUMNS)
+	{
+		ft_putstr_fd("Error: Number of columns more then max.\n",  2);
+		return (false);
+	}
+	return(true);
+}
+
+bool	is_rectangular(t_temp_map *temp_map)
+{
+	int	len_sample;
+	int	str_len;
+	int i;
+	
+	len_sample = ft_strlen(temp_map->layout[0]);
+	i = 0;
+	while(temp_map->layout[i])
+	{
+		str_len = ft_strlen(temp_map->layout[i]);
+		if(str_len != len_sample)
+		{
+			ft_putstr_fd("Error: The map is not rectangular.\n",  2);
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool  is_valid(t_temp_map *temp_map)
 {
 	if (is_invalid_char(temp_map)  // tested
 		&& is_collectibles(temp_map) // tested
 		&& is_player(temp_map) // tested
 		&& is_exit(temp_map) // tested
-		&& is_walls(temp_map)) // tested
+		&& is_walls(temp_map) // tested
+		&& is_in_max_columns(temp_map) // tested
+		&& is_rectangular(temp_map)) // rested
 		{
 			return (true);			
 		}
 	return (false);	
 }
-// is_rectangular()

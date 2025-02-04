@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 16:15:09 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:58:58 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int32_t	main(int ac, char **av)
 {
-	(void)ac;  // add 
-	
 	t_map		*map;	
 	t_sprites	*sprites;
 	t_game		*game;
 	const char 	*map_file;
-
+	
+	if(ac != 2)
+	{
+		ft_putstr_fd("Error: Add map.\n", 2);
+		return(EXIT_FAILURE);
+	}
 	map_file = av[1];
 /*
 	if(!is_path_valid(map_file))
@@ -64,8 +67,6 @@ int32_t	main(int ac, char **av)
 	free_map(map);
 	free(sprites);
 	free(game);
-	
-
-    ft_printf("See you!\n");
-	return EXIT_SUCCESS;
+	ft_putstr_fd("See you!\n", 1);	
+	return (EXIT_SUCCESS);
 }
