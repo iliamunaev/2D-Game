@@ -27,19 +27,15 @@ bool	render_sprite(t_game *game, char target, int row, int col)
 		sprite = game->sprites->exit;
 	else if (target == 'P')
 		sprite = game->sprites->player;
-	else
-	{
-		ft_putstr_fd("ERROR: render_sprite(): Invalid target character\n", 2);
-		return (false);
-	}
 	if (!sprite)
 	{
-		ft_putstr_fd("ERROR: render_sprite(): No valid sprite found\n", 2);
+		ft_putstr_fd("Error: assign sprite ptr to game failed\n", 2);
 		return (false);
 	}
-	if (mlx_image_to_window(game->mlx, sprite, col * TILE_SIZE, row * TILE_SIZE) == -1)
+	if (mlx_image_to_window(game->mlx, sprite,
+			col * TILE_SIZE, row * TILE_SIZE) == -1)
 	{
-		ft_putstr_fd("ERROR: render_sprite(): mlx_image_to_window() failed\n", 2);
+		ft_putstr_fd("Error: render_sprite -> mlx_image_to_window failed\n", 2);
 		return (false);
 	}
 	return (true);
@@ -47,22 +43,22 @@ bool	render_sprite(t_game *game, char target, int row, int col)
 
 static bool	render(t_game *game, char target)
 {
-	int	x;
-	int	y;
-	char **position;
-	
+	int		x;
+	int		y;
+	char	**position;
+
 	position = game->map->map;
 	y = 0;
-	while(y < game->map->rows)
+	while (y < game->map->rows)
 	{
 		x = 0;
-		while(x < game->map->cols)
+		while (x < game->map->cols)
 		{
 			if (position[y][x] == target)
 			{
 				if (!render_sprite(game, target, y, x))
 				{
-					ft_putstr_fd("ERROR: render(): Failed to render tile\n", 2);
+					ft_putstr_fd("Error: render -> tiles failed\n", 2);
 					return (false);
 				}
 			}
@@ -72,22 +68,23 @@ static bool	render(t_game *game, char target)
 	}
 	return (true);
 }
+
 bool	render_floor(t_game *game, char target)
 {
-	int	x;
-	int	y;
-	char **position;
-	
+	int		x;
+	int		y;
+	char	**position;
+
 	position = game->map->map;
 	y = 0;
-	while(y < game->map->rows)
+	while (y < game->map->rows)
 	{
 		x = 0;
-		while(x < game->map->cols)
+		while (x < game->map->cols)
 		{
 			if (!render_sprite(game, target, y, x))
 			{
-				ft_putstr_fd("ERROR: render(): Failed to render floor\n", 2);
+				ft_putstr_fd("Error: render_floor -> failed\n", 2);
 				return (false);
 			}
 			x++;
@@ -96,56 +93,19 @@ bool	render_floor(t_game *game, char target)
 	}
 	return (true);
 }
+
 int	render_game(t_game *game, t_sprites *sprites)
 {
 	game->sprites = sprites;
-
-	if (!game->sprites)
-	{
-		ft_putstr_fd("ERROR: render_game(): game->sprites is NULL\n", 2);
-		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): game->sprites -> ok\n", 2);
-
 	if (!render_floor(game, '0'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): floor \n", 2);
 		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): floor -> ok\n", 2);
-
-	// Render walls
 	if (!render(game, '1'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): walls \n", 2);
 		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): walls -> ok\n", 2);
-
-	// Render collectibles
 	if (!render(game, 'C'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): collectibles \n", 2);
 		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): collectibles -> ok\n", 2);
-	
-	// Render exit
 	if (!render(game, 'E'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): exit \n", 2);
 		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): exit -> ok\n", 2);
-
-	// Render player
 	if (!render(game, 'P'))
-	{		
-		ft_putstr_fd("ERROR: render_game(): player \n", 2);
 		return (EXIT_FAILURE);
-	}
-	ft_putstr_fd("SUCCESS: render_game(): player -> ok\n", 2);
-
-	ft_putstr_fd("SUCCESS: render_game(): Rendering complete\n", 2);
 	return (EXIT_SUCCESS);
 }

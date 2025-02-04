@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:36:53 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:15:09 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,10 @@ int32_t	main(int ac, char **av)
 	mlx_loop(game->mlx);	
 	mlx_terminate(game->mlx);
 	free_map(map);
-	//free()
+	free(sprites);
+	free(game);
 	
 
     ft_printf("See you!\n");
-	
-	//cleanup_game(game);
 	return EXIT_SUCCESS;
 }

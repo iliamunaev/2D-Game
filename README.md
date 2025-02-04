@@ -4,5 +4,6 @@ get screen dimentions
 ``` bash
 xdpyinfo | grep dimensions
 ```
-max imgs
-120 * 67 ims
+
+
+valgrind --leak-check=full --suppressions=valgrind.supp ./so_long maps/map_correct.ber
