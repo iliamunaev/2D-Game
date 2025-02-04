@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/03 11:08:56 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:47:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int32_t	main(int ac, char **av)
 {
-	(void)ac;
+	(void)ac;  // add 
 	
 	t_map		*map;	
 	t_sprites	*sprites;
@@ -37,7 +37,7 @@ int32_t	main(int ac, char **av)
 	map = init_map(map_file);
 	if(!map)
 	{		
-		ft_putstr_fd("ERROR: main(): load_map()\n", 2);
+		ft_putstr_fd("Error: main(): init_map()\n", 2);
 		return(EXIT_FAILURE);
 	}
 	else 

@@ -40,9 +40,9 @@
 typedef struct s_temp_map
 {
 	char	**layout;
-	int		rows; // must more 2
-	int		cols; // must more 3
-	int		collects; // must at least 1
+	int		rows;
+	int		cols;
+	int		collects;
 }	t_temp_map;
 
 typedef struct s_map
@@ -111,4 +111,6 @@ bool	render_floor(t_game *game, char target);
 bool  is_valid(t_temp_map *temp_map);
 
 void game_loop(void *param);
+
+void	free_temp_map(t_temp_map *temp_map);
 #endif

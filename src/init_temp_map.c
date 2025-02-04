@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:48:57 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 16:25:58 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:53:21 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int fillup_temp_map(t_temp_map *temp_map, const char *map_file)
 	temp_map->cols = 0;
 
 	
-	temp_map->layout = malloc(sizeof(char *) * MAX_ROWS);
+	temp_map->layout = malloc(MAX_ROWS * sizeof(char *));
 	if(!temp_map->layout)
 	{
 		ft_putstr_fd("ERROR: fillup_temp_map(): temp_map->layout malloc failed\n", 2);
@@ -67,8 +67,7 @@ t_temp_map	*init_temp_map(const char *map_file)
 		return (NULL);
 	}
 	else 
-		ft_putstr_fd("SUCCESS: init_temp_map(): temp_map memory allocation\n", 2);  // test
-
+		ft_putstr_fd("SUCCESS: init_temp_map(): temp_map memory allocation\n", 2);
 
 		
 	if(fillup_temp_map(temp_map, map_file) == INIT_ERROR)	
@@ -77,8 +76,9 @@ t_temp_map	*init_temp_map(const char *map_file)
 		return (NULL);
 	}
 	else 
-		ft_putstr_fd("SUCCESS: init_temp_map(): fillup_temp_map() -> ok\n", 2);  // test
+		ft_putstr_fd("SUCCESS: init_temp_map(): fillup_temp_map() -> ok\n", 2);
 		
+				
 	trim_2d_array(temp_map->layout);
 	return (temp_map);	
 }

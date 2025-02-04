@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:51:36 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/01 17:35:53 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:33:00 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 	
 int	init_layout(const char *map_file, t_temp_map *temp_map)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(map_file, O_RDONLY);
@@ -37,16 +37,11 @@ int	init_layout(const char *map_file, t_temp_map *temp_map)
 		
 		if (temp_map->rows >= MAX_ROWS)
         {
-			printf("%d\n", temp_map->rows);
             ft_putstr_fd("Error: init_layout() temp_map too large\n", 2);
-            //free_layout(temp_map);
             close(fd);
             return (INIT_ERROR);
-        }
-		
-		temp_map->layout[temp_map->rows] = line;	
-		
-		
+        }		
+		temp_map->layout[temp_map->rows] = line;		
 		if (!temp_map->layout[temp_map->rows])
 		{
 		//	free_layout(temp_map);
