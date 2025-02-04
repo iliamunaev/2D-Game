@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 17:58:58 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 00:28:00 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int32_t	main(int ac, char **av)
 {
-	t_map		*map;	
+	t_map		*map;
 	t_sprites	*sprites;
 	t_game		*game;
 	const char 	*map_file;
-	
+
 	if(ac != 2)
 	{
 		ft_putstr_fd("Error: Add map.\n", 2);
@@ -30,43 +30,47 @@ int32_t	main(int ac, char **av)
 	{
 		ft_putstr_fd("ERROR: main(): is_path_valid()\n", 2);
 		return (EXIT_FAILURE);
-	}	
-	else 
+	}
+	else
 		ft_putstr_fd("SUCCESS: main(): is_path_valid()\n", 2);
 
 	*/
 
 	map = init_map(map_file);
 	if(!map)
-	{	
+	{
 		ft_putstr_fd("Error: main -> init_map failed.\n", 2);
 		return(EXIT_FAILURE);
 	}
+
 	game = init_game(map);
 	if(!game)
 	{
 		ft_putstr_fd("Error: main ->: init_game failed.\n", 2);
 		return EXIT_FAILURE;
 	}
+	printf("here\n");
+	exit(1);
 	sprites = load_sprites(game);
 	if(!sprites)
-	{		
+	{
 		free_map(map);
 		free(game);
 		ft_putstr_fd("Error: main -> load_sprites failed\n", 2);
 		return(EXIT_FAILURE);
 	}
+
 	if (render_game(game, sprites) == EXIT_FAILURE)
 	{
 		ft_putstr_fd("Error: main -> render_game failed.\n", 2);
 		return (EXIT_FAILURE);
 	}
-	mlx_loop_hook(game->mlx, game_loop, game);	
-	mlx_loop(game->mlx);	
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	free_map(map);
 	free(sprites);
 	free(game);
-	ft_putstr_fd("See you!\n", 1);	
+	ft_putstr_fd("See you!\n", 1);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:13 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/04 18:26:13 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 00:27:35 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_map	*init_map(const char *map_file)
 		ft_putstr_fd("Error: init_map -> map validation failed.\n", 2);
 		return (NULL);
 	}
+
+
 	map = malloc(sizeof(t_map));
 	if (!map)
 	{
@@ -44,6 +46,8 @@ t_map	*init_map(const char *map_file)
 		ft_putstr_fd("Error: init_map -> fillup_map failed.\n", 2);
 		return (NULL);
 	}
+
 	free_temp_map(temp_map);
+
 	return (map);
 }

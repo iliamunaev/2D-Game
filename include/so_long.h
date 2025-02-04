@@ -28,6 +28,9 @@
 #define COLLECTIBLE 'C'
 #define EXIT 'E'
 #define PLAYER 'P'
+#define WALL '1'
+#define FLOOR '0'
+
 
 #define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
 #define PATH_TO_WALL "./sprites/wall.png"
@@ -35,12 +38,19 @@
 #define PATH_TO_FLOOR "./sprites/floor.png"
 #define PATH_TO_PLAYER "./sprites/player.png"
 
+typedef struct s_start
+{
+	int	row;
+	int	col;
+}	t_start;
+
 typedef struct s_temp_map
 {
 	char	**layout;
 	int		rows;
 	int		cols;
 	int		collects;
+	int		exit;
 }	t_temp_map;
 
 typedef struct s_map

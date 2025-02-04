@@ -73,9 +73,9 @@ bool	render_floor(t_game *game, char target)
 {
 	int		x;
 	int		y;
-	char	**position;
+	// char	**position;
 
-	position = game->map->map;
+	// position = game->map->map;
 	y = 0;
 	while (y < game->map->rows)
 	{
