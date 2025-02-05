@@ -12,165 +12,69 @@
 
 #include "so_long.h"
 
-int	find_collectible_instance(t_game *game, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_COLUMNS * MAX_ROWS) // replace to max num of collectbls
-	{
-		if (game->sprites->collects->instances[i].x / TILE_SIZE == x
-			&&game->sprites->collects->instances[i].y / TILE_SIZE == y)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-void	get_collectable(t_game *game, int y, int x)
-{
-	int	index;	
-	index = find_collectible_instance(game, x, y);
-	if (index != -1)
-	{
-		game->map->map[y][x] = '0';
-		game->sprites->collects->instances[index].enabled = false;
-		game->collects--;
-	}
-}
-
-void	move_player(t_game *game, int next_x, int next_y)
-{
-	game->sprites->player->instances[0].x = next_x;
-	game->sprites->player->instances[0].y = next_y;
-	game->moves++;
-	ft_printf("Movements count: %d\n", game->moves);
-}
-
-void	check_collectibles(t_game *game, char **target, t_corner *corner)
-{
-	int	i;
-	
-	i = 0;
-	while (i < 4)
-	{
-		if ((i == 0 && is_collectable(target[corner->top_left_y][corner->top_left_x])) ||
-			(i == 1 && is_collectable(target[corner->top_right_y][corner->top_right_x])) ||
-			(i == 2 && is_collectable(target[corner->bottom_left_y][corner->bottom_left_x])) ||
-			(i == 3 && is_collectable(target[corner->bottom_right_y][corner->bottom_right_x])))
-		{
-			if (i == 0)
-				get_collectable(game, corner->top_left_y, corner->top_left_x);
-			else if (i == 1)
-				get_collectable(game, corner->top_right_y, corner->top_right_x);
-			else if (i == 2)
-				get_collectable(game, corner->bottom_left_y, corner->bottom_left_x);
-			else
-				get_collectable(game, corner->bottom_right_y, corner->bottom_right_x);
-		}
-		i++;
-	}
-}
-
-bool	check_exit(t_game *game, char **target, t_corner *corner)
-{
-	int	i;
-	
-	i = 0;
-	while (i < 4)
-	{
-		if ((i == 0 && target[corner->top_left_y][corner->top_left_x] == 'E') ||
-			(i == 1 && target[corner->top_right_y][corner->top_right_x] == 'E') ||
-			(i == 2 && target[corner->bottom_left_y][corner->bottom_left_x] == 'E') ||
-			(i == 3 && target[corner->bottom_right_y][corner->bottom_right_x] == 'E'))
-		{
-			if (game->collects == 0)
-			{
-				ft_printf("You win!\n");
-				mlx_close_window(game->mlx);
-				return (true);
-            }
-        }
-        i++;
-    }
-    return (false);
-}
-
 bool	check_collision(char **target, t_corner *corner)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < 4)
 	{
-		if ((i == 0 && target[corner->top_left_y][corner->top_left_x] == '1') ||
-			(i == 1 && target[corner->top_right_y][corner->top_right_x] == '1') ||
-			(i == 2 && target[corner->bottom_left_y][corner->bottom_left_x] == '1') ||
-			(i == 3 && target[corner->bottom_right_y][corner->bottom_right_x] == '1'))
+		if ((i == 0 && target[corner->tly][corner->t_left_x] == '1')
+		|| (i == 1 && target[corner->try][corner->trx] == '1')
+		|| (i == 2 && target[corner->bly][corner->blx] == '1')
+		|| (i == 3 && target[corner->bry][corner->brx] == '1'))
 			return (true);
 		i++;
 	}
 	return (false);
 }
 
-void	get_next_position(int *next_x, int *next_y, int x, int y, int direction, int axe)
+void	get_next_position(t_position *pos, int dir, int axe)
 {
-	if(axe == AXE_X)
-	{
-		*next_x = x + direction * STEP;
-		*next_y = y;
-	}
-	if(axe == AXE_Y)
-	{
-		*next_x = x;
-		*next_y = y + direction * STEP;
-	}
+	if (axe == AXE_X)
+		pos->x += dir * STEP;
+	else
+		pos->y += dir * STEP;
 }
 
-void process_action(t_game *game, char **target, int direction, int axe)
+void	process_action(t_game *game, char **target, int dir, int axe)
 {
-	int			x;
-	int			y;
-	int			next_x;
-	int			next_y;
-	t_corner	*corner;
+	t_position	pos;
+	t_position	next;
+	t_corner	corner;
 
-	y = game->sprites->player->instances[0].y;
-	x = game->sprites->player->instances[0].x;
-	get_next_position(&next_x, &next_y, x, y, direction, axe);
-	corner = init_corners(next_x, next_y);
-	if (!corner)
+	pos.y = game->sprites->player->instances[0].y;
+	pos.x = game->sprites->player->instances[0].x;
+	next = pos;
+	get_next_position(&next, dir, axe);
+	init_corners(&corner, next.x, next.y);
+	if (check_collision(target, &corner))
 		return ;
-	if (check_collision(target, corner))
-	{
-		free(corner);
+	move_player(game, next.x, next.y);
+	check_collectibles(game, target, &corner);
+	if (check_exit(game, target, &corner))
 		return ;
-	}
-	move_player(game, next_x, next_y);
-	check_collectibles(game, target, corner);
-	if (check_exit(game, target, corner))
-    {
-		free(corner);
-		return ;
-	}
-	free(corner);
 }
 
-void game_loop(void *param)
+void	game_loop(void *param)
 {
 	t_game	*game;
 	char	**target;
-		
+
 	game = (t_game *)param;
 	target = game->map->map;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(game->mlx, MLX_KEY_D))
-		process_action(game, target,  1, AXE_X);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT) || mlx_is_key_down(game->mlx, MLX_KEY_A))
-		process_action(game, target,  -1, AXE_X);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN) || mlx_is_key_down(game->mlx, MLX_KEY_S))
-		process_action(game, target,  1, AXE_Y);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_UP) || mlx_is_key_down(game->mlx, MLX_KEY_W))
-		process_action(game, target,  -1, AXE_Y);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
+		process_action(game, target, 1, AXE_X);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_A))
+		process_action(game, target, -1, AXE_X);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
+		process_action(game, target, 1, AXE_Y);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
+		process_action(game, target, -1, AXE_Y);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(game->mlx);
+		mlx_close_window(game->mlx);
 }

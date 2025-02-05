@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:15:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 00:30:31 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:07:53 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_game	*init_game(t_map *map)
+static t_game	*init_mlx(t_map *map)
 {
 	t_game		*game;
 
 	game = malloc(sizeof(t_game));
-	if(!game)
+	if (!game)
 	{
-		ft_putstr_fd("Error: init_game -> malloc game memory allocation failed\n", 2);
+		ft_putstr_fd("Error: init_game -> malloc game malloc failed\n", 2);
 		return (NULL);
 	}
-	game->mlx = mlx_init(map->cols * TILE_SIZE, map->rows * TILE_SIZE, "So Long", true);
-
+	game->mlx = mlx_init(map->cols * TILE_SIZE,
+			map->rows * TILE_SIZE, "So Long", true);
 	if (!game->mlx)
 	{
 		free_map(map);
@@ -36,5 +36,22 @@ t_game	*init_game(t_map *map)
 	game->collects = map->collects;
 	game->moves = 0;
 	game->is_exit = false;
+	return (game);
+}
+
+t_game	*init_game(const char *map_file)
+{
+	t_map	*map;
+	t_game	*game;
+
+	map = init_map(map_file);
+	if (!map)
+		return (NULL);
+	game = init_mlx(map);
+	if (!game)
+	{
+		free_map(map);
+		return (NULL);
+	}
 	return (game);
 }

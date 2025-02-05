@@ -1,42 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 13:34:02 by imunaev-          #+#    #+#             */
+/*   Updated: 2025/02/05 14:49:14 by imunaev-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <stdbool.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h> // delete on production
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h> // delete on production
+# include <MLX42/MLX42.h>
+# include "../libs/libft/libft.h"
 
-#include <MLX42/MLX42.h>
-#include "../libs/libft/libft.h"
+# define MAX_SCREEN_WIDTH 3840
+# define MAX_SCREEN_HEIGHT 2144
 
-#define MAX_SCREEN_WIDTH 3840
-#define MAX_SCREEN_HEIGHT 2144
+# define TILE_SIZE 64
+# define STEP 4
 
-#define TILE_SIZE 64
-#define STEP 4
+# define MAX_COLUMNS 60
+# define MAX_ROWS 32
 
-// #define INIT_ERROR	3
-// #define INIT_SUCCESS 2
+# define AXE_X 0
+# define AXE_Y 1
 
-#define MAX_COLUMNS 60
-#define MAX_ROWS 32
+# define COLLECTIBLE 'C'
+# define EXIT 'E'
+# define PLAYER 'P'
+# define WALL '1'
+# define FLOOR '0'
 
-#define AXE_X 0
-#define AXE_Y 1
+# define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
+# define PATH_TO_WALL "./sprites/wall.png"
+# define PATH_TO_EXIT "./sprites/exit.png"
+# define PATH_TO_FLOOR "./sprites/floor.png"
+# define PATH_TO_PLAYER "./sprites/player.png"
 
-#define COLLECTIBLE 'C'
-#define EXIT 'E'
-#define PLAYER 'P'
-#define WALL '1'
-#define FLOOR '0'
-
-
-#define PATH_TO_COLLECTIBLE "./sprites/collectible.png"
-#define PATH_TO_WALL "./sprites/wall.png"
-#define PATH_TO_EXIT "./sprites/exit.png"
-#define PATH_TO_FLOOR "./sprites/floor.png"
-#define PATH_TO_PLAYER "./sprites/player.png"
+typedef struct s_position
+{
+	int	x;
+	int	y;
+}	t_position;
 
 typedef struct s_start
 {
@@ -63,17 +76,17 @@ typedef struct s_map
 
 typedef struct s_corner
 {
-	int	top_left_y;
-	int	top_left_x;
-	int	top_right_y;
-	int	top_right_x;
-	int	bottom_left_y;
-	int	bottom_left_x;
-	int	bottom_right_y;
-	int	bottom_right_x;
+	int	tly;
+	int	t_left_x;
+	int	try;
+	int	trx;
+	int	bly;
+	int	blx;
+	int	bry;
+	int	brx;
 }	t_corner;
 
-typedef struct	s_sprites
+typedef struct s_sprites
 {
 	mlx_image_t	*player;
 	mlx_image_t	*floor;
@@ -87,28 +100,51 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_map		*map;
 	t_sprites	*sprites;
-	int 		collects;
+	int			collects;
 	int			moves;
 	bool		is_exit;
 }	t_game;
 
-
+// init functions
+int			handle_arguments(int ac, char **av, const char **map_file);
+int			open_map_file(const char *map_file);
+t_game		*init_game(const char *map_file);
+t_sprites	*init_sprites(t_game *game);
+int			render_game(t_game *game, t_sprites *sprites);
 t_map		*init_map(const char *map_file);
 t_temp_map	*init_temp_map(const char *map_file);
 int			fillup_map(t_map *map, t_temp_map *temp_map);
-int			init_layout(const char *map_file, t_temp_map *temp_map);
-t_sprites	*load_sprites(t_game *game);
-bool		render_sprite(t_game *game, char target, int row, int col);
-t_game		*init_game(t_map *map);
-int			render_game(t_game *game, t_sprites *sprites);
-bool		render_floor(t_game *game, char target);
-bool  		is_valid(t_temp_map *temp_map);
-void 		game_loop(void *param);
-void		free_temp_map(t_temp_map *temp_map);
-void		free_map(t_map *map);
-bool		is_collectable(char collectable);
-t_corner	*init_corners(int next_x, int next_y);
-void	trim_2d_array(char **arr);
-int fillup_temp_map(t_temp_map *temp_map, const char *map_file);
+void		trim_2d_array(char **arr);
 
-# endif
+// map validation functions
+bool		is_valid(t_temp_map *temp_map);
+bool		additional_validation(t_temp_map *temp_map);
+bool		is_cltbl(char collectable);
+void		revert_map(t_temp_map *temp_map);
+bool		is_walls(t_temp_map *temp_map);
+bool		is_rectangular(t_temp_map *temp_map);
+bool		is_in_max_columns(t_temp_map *temp_map);
+bool		is_valid_chars(t_temp_map *temp_map);
+bool		check_exit(t_game *game, char **target, t_corner *corner);
+void		check_collectibles(t_game *game, char **target, t_corner *corner);
+
+// path validation functions
+bool	check_path_not_null(const char *map_file);
+bool	check_filename_length(int file_name_len);
+bool	check_extension_ber(const char *map_file, int file_name_len);
+bool	check_invalid_chars(const char *map_file, int file_name_len);
+bool	check_file_exists(const char *map_file);
+
+// game running functions
+void		game_loop(void *param);
+void		init_corners(t_corner *corner, int next_x, int next_y);
+void		move_player(t_game *game, int nx, int ny);
+int			find_collectible_instance(t_game *game, int x, int y);
+void		get_collectable(t_game *game, int y, int x);
+
+// free memory functions
+void		cleanup(t_game *game, t_sprites *sprites);
+void		free_map(t_map *map);
+void		free_temp_map(t_temp_map *temp_map);
+
+#endif
