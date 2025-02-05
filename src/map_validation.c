@@ -6,32 +6,12 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:55:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 00:26:12 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 08:32:05 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-** Example definitions or includes:
-**
-** #include <stdlib.h> // for malloc/free, EXIT_SUCCESS, EXIT_FAILURE
-** #include <stdbool.h> // for bool, true, false
-** #include "libft.h"   // if your ft_* functions come from here
-**
-** #define WALL '1'
-** #define FLOOR '0'
-** #define PLAYER 'P'
-** #define EXIT 'E'
-** #define COLLECTIBLE 'C'
-**
-** #define MAX_COLUMNS 100
-*/
-
-/*
-** 1) Checks the left and right walls.
-**    Ensures the first and last char in each row is '1'.
-*/
 bool	is_left_n_right_walls(t_temp_map *temp_map)
 {
 	int	i;
@@ -72,9 +52,6 @@ bool	is_walls(t_temp_map *temp_map)
 	return (true);
 }
 
-/*
-** 3) Checks that each row is the same length -> rectangular map.
-*/
 bool	is_rectangular(t_temp_map *temp_map)
 {
 	int	i;
@@ -96,9 +73,6 @@ bool	is_rectangular(t_temp_map *temp_map)
 	return (true);
 }
 
-/*
-** 4) Checks if the number of columns is within some MAX_COLUMNS limit.
-*/
 bool	is_in_max_columns(t_temp_map *temp_map)
 {
 	if (temp_map->cols > MAX_COLUMNS)
@@ -163,79 +137,62 @@ int	get_start(t_temp_map *temp_map, t_start *start)
 
 void	revert_map(t_temp_map *temp_map)
 {
-		printf("temp_map->rows: %d\n", temp_map->rows);
-		printf("temp_map->cols: %d\n", temp_map->cols);
 
-    int y = 0;
-    while (y < temp_map->rows)
-    {
-        int x = 0;
-        while (x < temp_map->cols)
-        {
-			printf("BEFORE temp_map->layout: %c\n", temp_map->layout[y][x]);
+	int y = 0;
+	while (y < temp_map->rows)
+	{
+		int x = 0;
+		while (x < temp_map->cols)
+		{
 
-            char c = temp_map->layout[y][x];
-            if (c == 'L')
-                temp_map->layout[y][x] = FLOOR;
-            else if (c == 'X')
+			char c = temp_map->layout[y][x];
+			if (c == 'L')
+				temp_map->layout[y][x] = FLOOR;
+			else if (c == 'X')
 			{
-                temp_map->layout[y][x] = EXIT;
+				temp_map->layout[y][x] = EXIT;
 				temp_map->exit++;
 			}
-            else if (c == 'O')
+			else if (c == 'O')
 			{
-                temp_map->layout[y][x] = COLLECTIBLE;
+				temp_map->layout[y][x] = COLLECTIBLE;
 				temp_map->collects++;
 			}
-            else if (c == 'A')
-                temp_map->layout[y][x] = PLAYER;
-			printf("AFTER temp_map->layout: %c\n", temp_map->layout[y][x]);
-			printf("x: %d\n", x);
-
-            x++;
-        }
-		printf("y: %d\n", y);
-        y++;
-    }
+			else if (c == 'A')
+				temp_map->layout[y][x] = PLAYER;
+			x++;
+		}
+		y++;
+	}
 }
 
 void fill_check(t_temp_map *temp_map, int y, int x)
 {
-    char **map = temp_map->layout;
+	char	**map;
 
-    if (y < 0 || y >= temp_map->rows || x < 0 || x >= temp_map->cols)
-	{
-        return ;
-	}
-
-    if (map[y][x] == WALL || map[y][x] == 'L' || map[y][x] == 'X' || map[y][x] == 'O'|| map[y][x] == 'A')
-	{
-        return ;
-	}
-
+	map = temp_map->layout;
+	if (y < 0 || y >= temp_map->rows || x < 0 || x >= temp_map->cols)
+		return ;
+	if (map[y][x] == WALL || map[y][x] == 'L' || map[y][x] == 'X' || map[y][x] == 'O'|| map[y][x] == 'A')
+		return ;
 	if(map[y][x] == FLOOR)
-    	map[y][x] = 'L';
-
-    if (map[y][x] == EXIT)
-    {
+		map[y][x] = 'L';
+	if (map[y][x] == EXIT)
+	{
 		map[y][x] = 'X';
-        temp_map->exit -= 1;
-    }
-    if (map[y][x] == COLLECTIBLE)
-    {
+		temp_map->exit -= 1;
+	}
+	if (map[y][x] == COLLECTIBLE)
+	{
 		map[y][x] = 'O';
-        temp_map->collects -= 1;
-    }
-	    if (map[y][x] == PLAYER)
-    {
+		temp_map->collects -= 1;
+	}
+	if (map[y][x] == PLAYER)
 		map[y][x] = 'A';
-    }
-
-    // 7. Recurse in 4 directions
-    fill_check(temp_map, y + 1, x);
-    fill_check(temp_map, y - 1, x);
-    fill_check(temp_map, y, x + 1);
-    fill_check(temp_map, y, x - 1);
+	fill_check(temp_map, y + 1, x);
+	fill_check(temp_map, y - 1, x);
+	fill_check(temp_map, y, x + 1);
+	fill_check(temp_map, y, x - 1);
 }
 
 bool	is_add_validate(t_temp_map *temp_map, t_start *start)
@@ -261,6 +218,8 @@ bool	is_add_validate(t_temp_map *temp_map, t_start *start)
 		free(start);
 		return (false);
 	}
+	temp_map->collects = collects_to_check;
+	temp_map->exit= exits_to_check;
 
 	fill_check(temp_map, start->row, start->col);
 
@@ -268,7 +227,7 @@ bool	is_add_validate(t_temp_map *temp_map, t_start *start)
 	printf("temp_map->exit: %d\n", temp_map->exit );
 
 
-	if (temp_map->collects != -collects_to_check || temp_map->exit != -exits_to_check)
+	if (temp_map->collects != 0 || temp_map->exit != 0)
 	{
 		ft_putstr_fd("Error: Not all collectibles or exit are reachable.\n", 2);
 		free(start);
@@ -276,8 +235,8 @@ bool	is_add_validate(t_temp_map *temp_map, t_start *start)
 	}
 	revert_map(temp_map);
 
-	// printf("rev temp_map->collects: %d\n", temp_map->collects );
-	// printf("rev temp_map->exit: %d\n", temp_map->exit );
+	printf("rev temp_map->collects: %d\n", temp_map->collects );
+	printf("rev temp_map->exit: %d\n", temp_map->exit );
 
 	free(start);
 

@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 00:28:00 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 08:27:07 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ int32_t	main(int ac, char **av)
 		ft_putstr_fd("Error: main -> init_map failed.\n", 2);
 		return(EXIT_FAILURE);
 	}
+	int i = 0;
+	while(i < map->rows)
+	{
+		printf("%s\n", map->map[i]);
+		i++;
+	}
+	printf("%d\n", map->cols);
+	printf("%d\n", map->rows);
+	printf("%d\n", map->collects);
+
+
+	exit(1);
+
 
 	game = init_game(map);
 	if(!game)
