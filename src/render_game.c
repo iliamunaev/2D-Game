@@ -95,15 +95,15 @@ static bool	render_floor(t_game *game, char target)
 int	render_game(t_game *game, t_sprites *sprites)
 {
 	game->sprites = sprites;
-	if (!render_floor(game, '0'))
+	if (!render_floor(game, FLOOR))
 		return (EXIT_FAILURE);
-	if (!render(game, '1'))
+	if (!render(game, WALL))
 		return (EXIT_FAILURE);
-	if (!render(game, 'C'))
+	if (!render(game, COLLECTIBLE))
 		return (EXIT_FAILURE);
-	if (!render(game, 'E'))
+	if (!render(game, EXIT))
 		return (EXIT_FAILURE);
-	if (!render(game, 'P'))
+	if (!render(game, PLAYER))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

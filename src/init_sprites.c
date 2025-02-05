@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:20:28 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 13:32:46 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:16:15 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_sprites	*init_sprites(t_game *game)
 	sprites = load_sprites(game);
 	if (!sprites)
 	{
+		mlx_terminate(game->mlx);
 		free_map(game->map);
 		free(game);
 		return (NULL);

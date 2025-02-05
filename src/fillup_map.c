@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:51:07 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 13:18:17 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:40:04 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	fillup_layout(t_map *map, t_temp_map *temp_map)
 	if (!map->map)
 	{
 		ft_putstr_fd("Error: fillup_layout -> malloc 'map->rows' failed\n", 2);
-		free(map);
 		return (EXIT_FAILURE);
 	}
 	i = 0;

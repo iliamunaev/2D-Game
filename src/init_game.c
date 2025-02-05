@@ -27,7 +27,7 @@ static t_game	*init_mlx(t_map *map)
 	if (!game->mlx)
 	{
 		free_map(map);
-		free(game);
+		game = NULL;
 		ft_putstr_fd("Error: init_game -> mlx_init failed\n", 2);
 		return (NULL);
 	}

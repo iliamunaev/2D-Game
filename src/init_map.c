@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:13 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 13:32:32 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:36:01 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_map	*init_map(const char *map_file)
 {
 	t_map		*map;
 	t_temp_map	*temp_map;
-
+	
 	temp_map = init_temp_map(map_file);
 	if (!temp_map)
-		return (NULL);
+		return (NULL);	
 	if (!is_valid(temp_map))
 		return (NULL);
 	map = malloc(sizeof(t_map));
