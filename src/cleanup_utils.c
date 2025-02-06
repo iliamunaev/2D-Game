@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 11:16:46 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 10:12:08 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:09:21 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	cleanup(t_game *game, t_sprites *sprites)
 {
 	if (game)
 	{
-		mlx_terminate(game->mlx);
 		free_map(game->map);
 		free(game);
 	}

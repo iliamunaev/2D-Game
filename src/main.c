@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:21:16 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 13:41:42 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:09:11 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ int	main(int ac, char **av)
 	{
 		cleanup(game, sprites);
 		return (EXIT_FAILURE);
-	}
+	}	
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 	cleanup(game, sprites);
 	return (EXIT_SUCCESS);
 }

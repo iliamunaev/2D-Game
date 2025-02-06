@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:28:01 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 17:34:19 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:05:14 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	fillup_temp_map(t_temp_map *temp_map, const char *map_file)
 	temp_map->cols = 0;
 	temp_map->collects = 0;
 	temp_map->exit = 0;
-	temp_map->layout = malloc(MAX_ROWS * sizeof(char *));
+	temp_map->layout = malloc((MAX_ROWS + 1) * sizeof(char *));
 	if (!temp_map->layout)
 	{
 		ft_putstr_fd("Error: temp_map layout malloc failed.\n", 2);

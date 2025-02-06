@@ -76,5 +76,7 @@ void	game_loop(void *param)
 		|| mlx_is_key_down(game->mlx, MLX_KEY_W))
 		process_action(game, target, -1, AXE_Y);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	{
 		mlx_close_window(game->mlx);
+	}
 }
