@@ -19,7 +19,7 @@ bool	check_collision(char **target, t_corner *corner)
 	i = 0;
 	while (i < 4)
 	{
-		if ((i == 0 && target[corner->tly][corner->t_left_x] == '1')
+		if ((i == 0 && target[corner->tly][corner->tlx] == '1')
 		|| (i == 1 && target[corner->try][corner->trx] == '1')
 		|| (i == 2 && target[corner->bly][corner->blx] == '1')
 		|| (i == 3 && target[corner->bry][corner->brx] == '1'))

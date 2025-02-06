@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:34:02 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 10:13:49 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:16:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_map
 typedef struct s_corner
 {
 	int	tly;
-	int	t_left_x;
+	int	tlx;
 	int	try;
 	int	trx;
 	int	bly;

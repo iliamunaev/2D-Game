@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:41:09 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:42:38 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:16:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	check_collectibles(t_game *game, char **target, t_corner *corner)
 	i = 0;
 	while (i < 4)
 	{
-		if ((i == 0 && is_cltbl(target[corner->tly][corner->t_left_x]))
+		if ((i == 0 && is_cltbl(target[corner->tly][corner->tlx]))
 			|| (i == 1 && is_cltbl(target[corner->try][corner->trx]))
 			|| (i == 2 && is_cltbl(target[corner->bly][corner->blx]))
 			|| (i == 3 && is_cltbl(target[corner->bry][corner->brx])))
 		{
 			if (i == 0)
-				get_collectable(game, corner->tly, corner->t_left_x);
+				get_collectable(game, corner->tly, corner->tlx);
 			else if (i == 1)
 				get_collectable(game, corner->try, corner->trx);
 			else if (i == 2)
@@ -72,7 +72,7 @@ bool	check_exit(t_game *game, char **target, t_corner *corner)
 	i = 0;
 	while (i < 4)
 	{
-		if ((i == 0 && target[corner->tly][corner->t_left_x] == 'E') ||
+		if ((i == 0 && target[corner->tly][corner->tlx] == 'E') ||
 			(i == 1 && target[corner->try][corner->trx] == 'E') ||
 			(i == 2 && target[corner->bly][corner->blx] == 'E') ||
 			(i == 3 && target[corner->bry][corner->brx] == 'E'))

@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:41:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 10:11:26 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:16:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_corners(t_corner *corner, int next_x, int next_y)
 {
-	corner->t_left_x = next_x / TILE_SIZE;
+	corner->tlx = next_x / TILE_SIZE;
 	corner->tly = next_y / TILE_SIZE;
 	corner->trx = (next_x + TILE_SIZE - 1) / TILE_SIZE;
 	corner->try = next_y / TILE_SIZE;
