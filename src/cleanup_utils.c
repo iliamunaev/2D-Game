@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 11:16:46 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 16:12:52 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:12:08 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,4 @@ void	cleanup(t_game *game, t_sprites *sprites)
 	if (sprites)
 		free(sprites);
 	ft_putstr_fd("See you!\n", 1);
-} 
+}

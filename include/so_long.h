@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:34:02 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 10:00:04 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:13:49 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define TILE_SIZE 64
 # define STEP 4
 
-# define DEVIDER (TILE_SIZE / STEP) 
+# define DEVIDER 16
 
 # define MAX_COLUMNS 60
 # define MAX_ROWS 32
@@ -130,11 +130,11 @@ bool		check_exit(t_game *game, char **target, t_corner *corner);
 void		check_collectibles(t_game *game, char **target, t_corner *corner);
 
 // path validation functions
-bool	check_path_not_null(const char *map_file);
-bool	check_filename_length(int file_name_len);
-bool	check_extension_ber(const char *map_file, int file_name_len);
-bool	check_invalid_chars(const char *map_file, int file_name_len);
-bool	check_file_exists(const char *map_file);
+bool		check_path_not_null(const char *map_file);
+bool		check_filename_length(int file_name_len);
+bool		check_extension_ber(const char *map_file, int file_name_len);
+bool		check_invalid_chars(const char *map_file, int file_name_len);
+bool		check_file_exists(const char *map_file);
 
 // game running functions
 void		game_loop(void *param);

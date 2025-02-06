@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:41:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 09:59:56 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:11:26 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	move_player(t_game *game, int nx, int ny)
 	game->sprites->player->instances[0].x = nx;
 	game->sprites->player->instances[0].y = ny;
 	game->moves++;
-	if(game->moves % DEVIDER == 0)
+	if (game->moves % DEVIDER == 0)
 	{
-		ft_printf("Movements count: %d\n", (game->moves / DEVIDER));		
+		ft_printf("Movements count: %d\n", (game->moves / DEVIDER));
 	}
 }
