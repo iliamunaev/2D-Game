@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:36:39 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 14:36:52 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 08:56:38 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ bool	check_filename_length(int file_name_len)
 
 bool	check_extension_ber(const char *map_file, int file_name_len)
 {
+	if (!map_file || file_name_len < 4)
+	{
+		ft_putstr_fd("Error: File name is too short or NULL.\n", 2);
+		return (false);
+	}
 	if (ft_strncmp(&map_file[file_name_len - 4], ".ber", 4) != 0)
 	{
 		ft_putstr_fd("Error: File must have a '.ber' extension.\n", 2);

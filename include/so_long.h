@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:34:02 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 14:49:14 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:00:04 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h> // delete on production
 
 # include <MLX42/MLX42.h>
 # include "../libs/libft/libft.h"
@@ -26,6 +25,8 @@
 
 # define TILE_SIZE 64
 # define STEP 4
+
+# define DEVIDER (TILE_SIZE / STEP) 
 
 # define MAX_COLUMNS 60
 # define MAX_ROWS 32
