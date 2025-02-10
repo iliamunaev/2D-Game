@@ -6,7 +6,7 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:28:01 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/10 10:17:34 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:59:53 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ static int	fillup_temp_map(t_temp_map *temp_map, const char *map_file)
 	}
 	if (init_layout(map_file, temp_map) == EXIT_FAILURE)
 	{
+		free(temp_map->layout);
 		ft_putstr_fd("Error: fillup_temp_map -> init_layout failed.\n", 2);
 		return (EXIT_FAILURE);
 	}
