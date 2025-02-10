@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:41:29 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/10 09:56:09 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:50:48 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,5 @@ void	move_player(t_game *game, int nx, int ny)
 	game->sprites->player->instances[0].x = nx;
 	game->sprites->player->instances[0].y = ny;
 	game->moves++;
-	if (game->moves % DEVIDER == 0)
-	{
-		ft_printf("Movements count: %d\n", (game->moves / DEVIDER));
-	}
+	ft_printf("Movements count: %d\n", game->moves);
 }

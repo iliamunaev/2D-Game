@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:34:02 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:00:21 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:48:37 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 
 # define TILE_SIZE 64
 # define STEP 4
-
-# define DEVIDER 16
 
 # define MAX_COLUMNS 60
 # define MAX_ROWS 32
