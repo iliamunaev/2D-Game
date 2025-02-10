@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arguments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:27:37 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/10 10:01:05 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:49:52 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /**
  * @brief Validates the given file path based on multiple criteria.
  *
- * Checks if the file path is non-null, has a valid length, contains 
- * a ".ber" extension, does not include invalid characters, and 
+ * Checks if the file path is non-null, has a valid length, contains
+ * a ".ber" extension, does not include invalid characters, and
  * confirms that the file exists.
  *
  * @param map_file Pointer to the file path string.
@@ -41,7 +41,7 @@ bool	is_path_valid(const char *map_file, int filename_len)
 /**
  * @brief Handles command-line arguments and validates the map file.
  *
- * Ensures that exactly one argument is provided, retrieves the map 
+ * Ensures that exactly one argument is provided, retrieves the map
  * file name, and validates its path using `is_path_valid()`.
  *
  * @param ac Argument count.
@@ -50,7 +50,7 @@ bool	is_path_valid(const char *map_file, int filename_len)
  * @return EXIT_SUCCESS if the map file is valid, EXIT_FAILURE otherwise.
  */
 int	handle_arguments(int ac, char **av, const char **map_file)
-{	
+{
 	int	filename_len;
 
 	if (ac != 2)
