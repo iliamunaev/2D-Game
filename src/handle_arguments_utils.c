@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_arguments_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
+/*   By: imunaev- <imunaev-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:36:39 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/10 10:00:19 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:55:29 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	check_path_not_null(const char *map_file)
 /**
  * @brief Validates the length of the file name.
  *
- * Ensures the file name is not empty and that its length falls within 
+ * Ensures the file name is not empty and that its length falls within
  * a valid range (between 5 and 255 characters).
  *
  * @param file_name_len Length of the file name.
@@ -58,7 +58,7 @@ bool	check_filename_length(int file_name_len)
 /**
  * @brief Checks if the file has a ".ber" extension.
  *
- * Verifies that the file name ends with ".ber", ensuring it meets 
+ * Verifies that the file name ends with ".ber", ensuring it meets
  * the expected format.
  *
  * @param map_file Pointer to the file path string.
@@ -100,7 +100,7 @@ bool	check_invalid_chars(const char *map_file, int file_name_len)
 	while (i < file_name_len)
 	{
 		if (ft_strchr(invalid_chars, map_file[i]))
-		{		
+		{
 			ft_putstr_fd("Error: File name contains invalid characters.\n", 2);
 			return (false);
 		}
@@ -119,9 +119,9 @@ bool	check_invalid_chars(const char *map_file, int file_name_len)
  */
 bool	check_file_exists(const char *map_file)
 {
-	if (access(map_file, F_OK) == -1)
+	if ((access(map_file, F_OK) == -1) || (access(map_file, R_OK) == -1))
 	{
-		ft_putstr_fd("Error: File does not exist.\n", 2);
+		ft_putstr_fd("Error: File does not exist / no read permission.\n", 2);
 		return (false);
 	}
 	return (true);
