@@ -6,12 +6,22 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 13:36:13 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 10:11:52 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:02:48 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Initializes the map structure from a given file.
+ *
+ * Loads a temporary map from the specified file, validates it, and 
+ * allocates memory for the final map structure. If memory allocation 
+ * or validation fails, it cleans up and returns NULL.
+ *
+ * @param map_file Path to the map file.
+ * @return Pointer to the initialized map structure, or NULL on failure.
+ */
 t_map	*init_map(const char *map_file)
 {
 	t_map		*map;

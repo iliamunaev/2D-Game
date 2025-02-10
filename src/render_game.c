@@ -12,6 +12,20 @@
 
 #include "so_long.h"
 
+/**
+ * @brief Renders a single sprite on the game window.
+ *
+ * Selects the appropriate sprite based on the target character ('0' for floor, 
+ * '1' for wall, 'C' for collectible, 'E' for exit, 'P' for player) and places 
+ * it at the specified row and column. If an error occurs,
+ * an error message is printed.
+ *
+ * @param game Pointer to the game structure.
+ * @param target The character representing the sprite type.
+ * @param row The row position of the sprite.
+ * @param col The column position of the sprite.
+ * @return true if rendering is successful, false otherwise.
+ */
 static bool	render_sprite(t_game *game, char target, int row, int col)
 {
 	mlx_image_t	*sprite;
@@ -41,6 +55,16 @@ static bool	render_sprite(t_game *game, char target, int row, int col)
 	return (true);
 }
 
+/**
+ * @brief Renders all instances of a specific tile type.
+ *
+ * Iterates through the game map and renders all occurrences of 
+ * the specified tile type (walls, collectibles, exits, or player).
+ *
+ * @param game Pointer to the game structure.
+ * @param target The character representing the tile type to be rendered.
+ * @return true if rendering is successful, false otherwise.
+ */
 static bool	render(t_game *game, char target)
 {
 	int		x;
@@ -69,6 +93,16 @@ static bool	render(t_game *game, char target)
 	return (true);
 }
 
+/**
+ * @brief Renders the floor tiles across the entire game map.
+ *
+ * Iterates through all rows and columns of the map, rendering the floor tiles.
+ * If rendering fails, an error message is printed.
+ *
+ * @param game Pointer to the game structure.
+ * @param target The character representing the floor tile.
+ * @return true if rendering is successful, false otherwise.
+ */
 static bool	render_floor(t_game *game, char target)
 {
 	int		x;
@@ -92,6 +126,17 @@ static bool	render_floor(t_game *game, char target)
 	return (true);
 }
 
+/**
+ * @brief Renders the entire game map.
+ *
+ * Assigns the sprite structure to the game and sequentially renders 
+ * the floor, walls, collectibles, exit, and player sprites onto the window.
+ * If any rendering step fails, the function returns EXIT_FAILURE.
+ *
+ * @param game Pointer to the game structure.
+ * @param sprites Pointer to the sprite structure.
+ * @return EXIT_SUCCESS if rendering is successful, EXIT_FAILURE otherwise.
+ */
 int	render_game(t_game *game, t_sprites *sprites)
 {
 	game->sprites = sprites;

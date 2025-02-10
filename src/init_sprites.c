@@ -6,12 +6,22 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:20:28 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 18:16:15 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:17:20 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Loads an image texture from a file and converts it to an MLX image.
+ *
+ * Loads a PNG texture using `mlx_load_png()` and converts it to an MLX image 
+ * using `mlx_texture_to_image()`. Cleans up the texture after conversion.
+ *
+ * @param game Pointer to the game structure.
+ * @param path_to_sprite Path to the sprite image file.
+ * @return Pointer to the created MLX image, or NULL on failure.
+ */
 static mlx_image_t	*get_img(t_game *game, const char *path_to_sprite)
 {
 	mlx_texture_t	*texture;
@@ -34,6 +44,17 @@ static mlx_image_t	*get_img(t_game *game, const char *path_to_sprite)
 	return (sprite);
 }
 
+/**
+ * @brief Loads all necessary game textures.
+ *
+ * Calls `get_img()` to load and assign textures for the player, floor, wall, 
+ * collectibles, and exit. If any texture fails to load, an error is printed.
+ *
+ * @param game Pointer to the game structure.
+ * @param sprites Pointer to the sprite structure.
+ * @return EXIT_SUCCESS if all textures are loaded successfully,
+ * EXIT_FAILURE otherwise.
+ */
 static int	load_textures(t_game *game, t_sprites *sprites)
 {
 	sprites->player = get_img(game, PATH_TO_PLAYER);
@@ -50,6 +71,16 @@ static int	load_textures(t_game *game, t_sprites *sprites)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Allocates and loads game sprites.
+ *
+ * Allocates memory for the `t_sprites` structure and initializes all 
+ * sprite pointers to NULL. Calls `load_textures()` to load textures.
+ * If loading fails, cleans up and returns NULL.
+ *
+ * @param game Pointer to the game structure.
+ * @return Pointer to the initialized sprite structure, or NULL on failure.
+ */
 static t_sprites	*load_sprites(t_game *game)
 {
 	t_sprites	*sprites;
@@ -74,6 +105,16 @@ static t_sprites	*load_sprites(t_game *game)
 	return (sprites);
 }
 
+/**
+ * @brief Initializes all game sprites.
+ *
+ * Calls `load_sprites()` to load textures and create sprite objects. 
+ * If initialization fails, cleans up MLX, frees the map, and
+ * terminates the game.
+ *
+ * @param game Pointer to the game structure.
+ * @return Pointer to the initialized sprite structure, or NULL on failure.
+ */
 t_sprites	*init_sprites(t_game *game)
 {
 	t_sprites	*sprites;

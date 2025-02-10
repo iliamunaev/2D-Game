@@ -6,12 +6,22 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:19:48 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 13:30:40 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:18:11 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Finds the starting position of the player on the map.
+ *
+ * Iterates through the map layout to locate the player ('P') and
+ * stores the row and column position in the `start` structure.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param start Pointer to the structure that stores the player's start position.
+ * @return EXIT_SUCCESS if the player is found, EXIT_FAILURE otherwise.
+ */
 static int	get_start(t_temp_map *temp_map, t_start *start)
 {
 	int	y;
@@ -36,6 +46,17 @@ static int	get_start(t_temp_map *temp_map, t_start *start)
 	return (EXIT_FAILURE);
 }
 
+/**
+ * @brief Determines whether a given map position should be avoided.
+ *
+ * Checks if the given coordinates are out of bounds or contain an 
+ * impassable character (wall, marked tiles, etc.).
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param y Row coordinate.
+ * @param x Column coordinate.
+ * @return true if the position should be avoided, false otherwise.
+ */
 static bool	is_avoid_char(t_temp_map *temp_map, int y, int x)
 {
 	if (y < 0 || y >= temp_map->rows || x < 0 || x >= temp_map->cols)
@@ -49,6 +70,17 @@ static bool	is_avoid_char(t_temp_map *temp_map, int y, int x)
 	return (false);
 }
 
+/**
+ * @brief Marks reachable areas on the map using flood-fill.
+ *
+ * Recursively explores the map from the given coordinates, marking 
+ * walkable tiles ('0'), collectibles ('C'), and exits ('E') with 
+ * special characters to track accessibility.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param y Starting row coordinate.
+ * @param x Starting column coordinate.
+ */
 static void	fill_check(t_temp_map *temp_map, int y, int x)
 {
 	char	**map;
@@ -76,6 +108,21 @@ static void	fill_check(t_temp_map *temp_map, int y, int x)
 	fill_check(temp_map, y, x - 1);
 }
 
+/**
+ * @brief Validates the number and accessibility of key game elements.
+ *
+ * Ensures that:
+ * - There is exactly one player ('P') and one exit ('E').
+ * - There is at least one collectible ('C').
+ * - All collectibles and the exit are reachable from the player's
+ * start position.
+ *
+ * If validation fails, an error message is printed.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param start Pointer to the starting position of the player.
+ * @return true if validation is successful, false otherwise.
+ */
 static bool	is_add_validate(t_temp_map *temp_map, t_start *start)
 {
 	int	collects_to_check;
@@ -102,6 +149,15 @@ static bool	is_add_validate(t_temp_map *temp_map, t_start *start)
 	return (true);
 }
 
+/**
+ * @brief Performs additional validation on the map.
+ *
+ * Checks if the player, exit, and collectibles are correctly placed and 
+ * ensures that all required elements are reachable.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @return true if the map passes additional validation, false otherwise.
+ */
 bool	additional_validation(t_temp_map *temp_map)
 {
 	t_start	start;

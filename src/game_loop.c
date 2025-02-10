@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+/**
+ * @brief Checks for a collision at the given corner positions.
+ *
+ * Iterates through the four corner positions of an entity to determine
+ * if any of them collide with a wall ('1') in the target map.
+ *
+ * @param target 2D array representing the game map.
+ * @param corner Pointer to the structure containing the corner positions.
+ * @return true if a collision is detected, false otherwise.
+ */
 bool	check_collision(char **target, t_corner *corner)
 {
 	int	i;
@@ -29,6 +39,16 @@ bool	check_collision(char **target, t_corner *corner)
 	return (false);
 }
 
+/**
+ * @brief Updates the next position based on direction and axis.
+ *
+ * Adjusts the x or y coordinate of a position based on the movement
+ * direction and axis of movement.
+ *
+ * @param pos Pointer to the position structure to update.
+ * @param dir Direction of movement (-1 for left/up, 1 for right/down).
+ * @param axe Movement axis (AXE_X for horizontal, AXE_Y for vertical).
+ */
 void	get_next_position(t_position *pos, int dir, int axe)
 {
 	if (axe == AXE_X)
@@ -37,6 +57,18 @@ void	get_next_position(t_position *pos, int dir, int axe)
 		pos->y += dir * STEP;
 }
 
+/**
+ * @brief Processes the player's movement and interactions.
+ *
+ * Computes the next position based on input direction and axis,
+ * checks for collisions, moves the player if no obstacles exist,
+ * and processes collectibles and exit conditions.
+ *
+ * @param game Pointer to the game structure.
+ * @param target 2D array representing the game map.
+ * @param dir Direction of movement (-1 for left/up, 1 for right/down).
+ * @param axe Movement axis (AXE_X for horizontal, AXE_Y for vertical).
+ */
 void	process_action(t_game *game, char **target, int dir, int axe)
 {
 	t_position	pos;
@@ -56,6 +88,15 @@ void	process_action(t_game *game, char **target, int dir, int axe)
 		return ;
 }
 
+/**
+ * @brief Main game loop that processes player input and actions.
+ *
+ * Checks for key presses and calls `process_action()` accordingly
+ * to move the player in different directions. Also listens for
+ * the escape key to close the game window.
+ *
+ * @param param Pointer to the game structure.
+ */
 void	game_loop(void *param)
 {
 	t_game	*game;

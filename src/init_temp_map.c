@@ -6,12 +6,21 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 10:28:01 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:05:14 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:17:34 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Sets the number of columns in the temporary map.
+ *
+ * Determines the number of columns based on the length of the first row.
+ * Ensures that the first row is not empty before setting the column count.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @return EXIT_SUCCESS if the column count is set, EXIT_FAILURE on error.
+ */
 static int	set_map_columns(t_temp_map *temp_map)
 {
 	int	len;
@@ -26,6 +35,16 @@ static int	set_map_columns(t_temp_map *temp_map)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Reads lines from the map file and stores them in the layout.
+ *
+ * Reads lines from the file descriptor using `get_next_line()` and stores 
+ * them in the temporary map's layout. Ensures the row limit is not exceeded.
+ *
+ * @param fd File descriptor of the open map file.
+ * @param temp_map Pointer to the temporary map structure.
+ * @return EXIT_SUCCESS if reading is successful, EXIT_FAILURE on error.
+ */
 static int	read_map_lines(int fd, t_temp_map *temp_map)
 {
 	char	*line;
@@ -53,6 +72,17 @@ static int	read_map_lines(int fd, t_temp_map *temp_map)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Initializes the layout of the temporary map.
+ *
+ * Opens the map file, reads its content into the temporary map's layout, 
+ * and sets the number of columns. If an error occurs, allocated memory 
+ * is freed before returning.
+ *
+ * @param map_file Path to the map file.
+ * @param temp_map Pointer to the temporary map structure.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error.
+ */
 static int	init_layout(const char *map_file, t_temp_map *temp_map)
 {
 	int	fd;
@@ -81,6 +111,16 @@ static int	init_layout(const char *map_file, t_temp_map *temp_map)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Fills up the temporary map structure.
+ *
+ * Initializes the map attributes and allocates memory for the layout.
+ * Calls `init_layout()` to read the map file content.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param map_file Path to the map file.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error.
+ */
 static int	fillup_temp_map(t_temp_map *temp_map, const char *map_file)
 {
 	temp_map->rows = 0;
@@ -101,6 +141,17 @@ static int	fillup_temp_map(t_temp_map *temp_map, const char *map_file)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Initializes the temporary map structure.
+ *
+ * Allocates memory for the `t_temp_map` structure, reads the map file, 
+ * and stores its contents in a 2D array. Trims newline characters at 
+ * the end of each row.
+ *
+ * @param map_file Path to the map file.
+ * @return Pointer to the initialized temporary map structure,
+ * or NULL on failure.
+ */
 t_temp_map	*init_temp_map(const char *map_file)
 {
 	t_temp_map	*temp_map;

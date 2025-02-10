@@ -6,12 +6,23 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:34:22 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/05 11:37:44 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:14:13 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Restores the original characters in the temporary map.
+ *
+ * Converts previously marked characters ('L', 'X', 'O', 'A') back to their 
+ * original representations (floor, exit, collectible, player).
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ * @param c The character to process.
+ * @param y Row coordinate.
+ * @param x Column coordinate.
+ */
 static void	process_char(t_temp_map *temp_map, char c, int y, int x)
 {
 	if (c == 'L')
@@ -30,6 +41,14 @@ static void	process_char(t_temp_map *temp_map, char c, int y, int x)
 		temp_map->layout[y][x] = PLAYER;
 }
 
+/**
+ * @brief Restores the map layout after validation.
+ *
+ * Iterates through the map and restores all modified characters 
+ * (used in validation) back to their original values.
+ *
+ * @param temp_map Pointer to the temporary map structure.
+ */
 void	revert_map(t_temp_map *temp_map)
 {
 	int		y;

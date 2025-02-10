@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+/**
+ * @brief Initializes the MLX window and game structure.
+ *
+ * Allocates memory for the `t_game` structure and initializes the MLX
+ * window using the map dimensions. If memory allocation or MLX 
+ * initialization fails, it cleans up and returns NULL.
+ *
+ * @param map Pointer to the map structure containing game dimensions.
+ * @return Pointer to the initialized game structure, or NULL on failure.
+ */
 static t_game	*init_mlx(t_map *map)
 {
 	t_game		*game;
@@ -39,6 +49,16 @@ static t_game	*init_mlx(t_map *map)
 	return (game);
 }
 
+/**
+ * @brief Initializes the game by loading the map and setting up MLX.
+ *
+ * Loads the map from the given file and then initializes the MLX window
+ * and game structure. If any initialization fails, it cleans up and 
+ * returns NULL.
+ *
+ * @param map_file Path to the map file.
+ * @return Pointer to the initialized game structure, or NULL on failure.
+ */
 t_game	*init_game(const char *map_file)
 {
 	t_map	*map;

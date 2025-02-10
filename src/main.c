@@ -6,12 +6,23 @@
 /*   By: imunaev- <imunaev-@studen.hive.fi>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:21:16 by imunaev-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:09:11 by imunaev-         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:08:07 by imunaev-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/**
+ * @brief Main entry point for the game.
+ *
+ * Handles argument parsing, initializes the game and its components, 
+ * and starts the game loop. If any initialization step fails, 
+ * the program exits with an error status.
+ *
+ * @param ac Argument count.
+ * @param av Argument vector.
+ * @return EXIT_SUCCESS if the game runs successfully, EXIT_FAILURE on error.
+ */
 int	main(int ac, char **av)
 {
 	const char	*map_file;
