@@ -64,7 +64,7 @@ make	# Compile the game
 ```
 Choos map from maps/ directory
 ```bash
-./so_long maps/sample_map.ber  # Run the game
+./so_long maps/normal_map.ber  # Run the game
 ```
 Clean the game
 ```bash
