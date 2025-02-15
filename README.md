@@ -82,3 +82,4 @@ valgrind --suppressions=valgrind.supp ./so_long maps/normal_map.ber	#with suppre
 ```bash
 valgrind --leak-check=full --track-origins=yes ./so_long maps/normal_map.ber	#without suppression file
 ```
+### Game design: [Oksana Plieva](https://www.linkedin.com/in/oksana-plieva-a3838228b/)
